@@ -4,3 +4,6 @@ jspm_packages/
 
 # Output directory from TypeScript compiler
 out/
+
+# JS files produced by the TypeScript compiler (TSC)
+*.js
