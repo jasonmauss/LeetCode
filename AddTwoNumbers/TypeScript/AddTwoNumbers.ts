@@ -43,6 +43,7 @@ function getNumberFromListNode(listNode: ListNode): bigint {
     return BigInt(numericString.split('').reverse().join(''));
 }
 
+// Test Case
 let l1: ListNode = new ListNode(3, null);
 let l2: ListNode = new ListNode(4, l1);
 let l3: ListNode = new ListNode(2, l2);
