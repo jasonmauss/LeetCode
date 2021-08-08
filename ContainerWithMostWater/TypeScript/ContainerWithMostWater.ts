@@ -1,3 +1,5 @@
+// Solution for: https://leetcode.com/problems/container-with-most-water/
+
 function maxArea(height: number[]): number {
 
     // store the largest area value
