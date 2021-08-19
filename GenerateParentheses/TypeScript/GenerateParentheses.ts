@@ -2,9 +2,10 @@
 
 const generateParenthesis = (n: number): string[] => {
 
-    // handle some easy cases
+    // hard code handling the real easy cases
     if (n === 0) return [];
     if (n === 1) return ['()'];
+    if (n === 2) return ['()()','(())'];
 
     const combinations = [];
     const combinationsDictionary = {}; // store combinations already generated based on 'n' value
@@ -41,5 +42,7 @@ const generateParenthesis = (n: number): string[] => {
 
 
 // some test cases
+console.log(generateParenthesis(2)); // ["()()", "(())"]
 console.log(generateParenthesis(3)); // ["((()))", "(()())", "(())()", "()(())", "()()()"]
-console.log(generateParenthesis(4)); // ["(((())))", "(()()())", "(())()()", "(()())()", "()(()())", "()()(())", "()()()()"]
+console.log(generateParenthesis(4)); // ['(((())))', '((()()))', '((())())', '(()(()))', '(()()())', '((()))()', '(()())()', '(())(())', '(())()()', '()((()))', '()(()())', '()(())()', '()()(())', '()()()()']
+console.log(generateParenthesis(5)); // just run it, there should be 42 of them

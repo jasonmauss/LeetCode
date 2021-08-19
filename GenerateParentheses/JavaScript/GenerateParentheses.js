@@ -1,10 +1,12 @@
 // Solution for: https://leetcode.com/problems/generate-parentheses/
 var generateParenthesis = function (n) {
-    // handle some easy cases
+    // hard code handling the real easy cases
     if (n === 0)
         return [];
     if (n === 1)
         return ['()'];
+    if (n === 2)
+        return ['()()', '(())'];
     var combinations = [];
     var combinationsDictionary = {}; // store combinations already generated based on 'n' value
     var _loop_1 = function (i) {
@@ -41,5 +43,7 @@ var generateParenthesis = function (n) {
     return combinations;
 };
 // some test cases
+console.log(generateParenthesis(2)); // ["()()", "(())"]
 console.log(generateParenthesis(3)); // ["((()))", "(()())", "(())()", "()(())", "()()()"]
-console.log(generateParenthesis(4)); // ["(((())))", "(()()())", "(())()()", "(()())()", "()(()())", "()()(())", "()()()()"]
+console.log(generateParenthesis(4)); // ['(((())))', '((()()))', '((())())', '(()(()))', '(()()())', '((()))()', '(()())()', '(())(())', '(())()()', '()((()))', '()(()())', '()(())()', '()()(())', '()()()()']
+console.log(generateParenthesis(5)); // just run it, there should be 42 of them
