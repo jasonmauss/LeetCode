@@ -11,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\ValidParentheses.js",
+            "program": "${workspaceFolder}\\MergeKSortedLists.js",
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ]
