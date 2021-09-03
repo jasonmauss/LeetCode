@@ -1,11 +1,14 @@
 // Solution for: https://leetcode.com/problems/valid-sudoku/
-const isValidSudoku = (board: string[][]): boolean => {
+const isValidSudoku2 = (board: string[][]): boolean => {
 
-    // do a check for each row
+    // do a check for each row (rowSet) and each column (colSet)
     for(let i: number = 0; i < board.length; i++) {
-        let curRowValues = board[i];
+
         let rowSet: Set<string> = new Set<string>();
-        for(let j: number = 0; j < curRowValues.length; j++) {
+        let colSet: Set<string> = new Set<string>();
+
+        for(let j: number = 0; j < board.length; j++) {
+            
             if(!rowSet.has(board[i][j]) && board[i][j] !== '.') {
                 rowSet.add(board[i][j]);
             } else {
@@ -13,17 +16,11 @@ const isValidSudoku = (board: string[][]): boolean => {
                     return false;
                 }
             }
-        }
-    }
 
-    // do a check for each column
-    let colSet: Set<string> = new Set<string>();
-    for(let i: number = 0; i < board.length; i++) {
-        for(let j: number = 0; j < board.length; j++) {
-            if(!colSet.has(board[i][j]) && board[i][j] !== '.') {
-                colSet.add(board[i][j]);
+            if(!colSet.has(board[j][i]) && board[j][i] !== '.') {
+                colSet.add(board[j][i]);
             } else {
-                if(board[i][j] !== '.') {
+                if(board[j][i] !== '.') {
                     return false;
                 }
             }
@@ -72,6 +69,29 @@ const isValidSudoku = (board: string[][]): boolean => {
 
     return true;
 };
+
+// second attempt - doing it all in one pass using coordinate strings
+const isValidSudoku = (board: string[][]): boolean => {
+    
+    let recordSet: Set<string> = new Set<string>();
+    
+    for(let row = 0; row < board.length; row++) {
+        for(let col = 0; col < board.length; col++) {
+            let currentValue = board[row][col];
+            if(currentValue === '.') continue;
+            let rowString = `row ${row} value ${currentValue}`;
+            let colString = `col ${col} value ${currentValue}`;
+            let boxName = `box ${Math.floor(row / 3)} : ${Math.floor(col / 3)}`; // e.g. box 1:1 or box 0:2
+            let boxString = `${boxName} value ${currentValue}`;
+
+            if(recordSet.has(rowString) || recordSet.has(colString) || recordSet.has(boxString)) return false;
+
+            recordSet.add(rowString).add(colString).add(boxString);
+        }
+    }
+
+    return true;
+}
 
 // some test cases
 let board = [["5","3",".",".","7",".",".",".","."]
