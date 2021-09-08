@@ -1,4 +1,0 @@
-MySQL/*.mysql linguist-detectable=true
-MySQL/*.mysql linguist-language=SQL
-MS SQL Server/*.sql linguist-detectable=true
-MS SQL Server/*.sql linguist-language=TSQL
