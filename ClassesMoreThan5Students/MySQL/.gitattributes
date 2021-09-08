@@ -1,2 +1,1 @@
-*.sql linguist-detectable=true
-*.sql linguist-language=MySQL
+*.sql linguist-detectable=true linguist-language=MySQL
