@@ -1,0 +1,17 @@
+// Solution for: https://leetcode.com/problems/reverse-prefix-of-word/
+
+const reversePrefix = (word: string, ch: string): string => {
+
+    let index = word.indexOf(ch);
+
+    if(index === -1) return word;
+
+    return word.substring(0, index + 1).split('').reverse().join('') + word.substring(index + 1);
+
+};
+
+// some test cases
+
+console.log(reversePrefix('abcdefd','d')); // dcbaefd
+console.log(reversePrefix('xyxzxe','z')); // zxyxxe
+console.log(reversePrefix('abcd','z')); // abcd
