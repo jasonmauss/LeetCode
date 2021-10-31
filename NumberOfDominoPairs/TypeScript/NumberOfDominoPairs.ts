@@ -1,21 +1,23 @@
 // Solution for: https://leetcode.com/problems/number-of-equivalent-domino-pairs/
 function numEquivDominoPairs(dominoes: number[][]): number {
 
-    let map = new Map();
-    let count = 0;
+    let dominoMap = new Map();
+    let pairCount = 0;
+
     for (let [a , b] of dominoes) {
+
         let key = a < b ? `${a}${b}` : `${b}${a}`;
 
-        if (map.has(key)) {
-            let currentIndex = map.get(key) + 1;
-            map.set(key, currentIndex);
-            count += currentIndex;
+        if (dominoMap.has(key)) {
+            let currentIndex = dominoMap.get(key) + 1;
+            dominoMap.set(key, currentIndex);
+            pairCount += currentIndex;
         } else {
-            map.set(key, 0);
+            dominoMap.set(key, 0);
         }
     }
 
-    return count;
+    return pairCount;
 };
 
 // some test cases
