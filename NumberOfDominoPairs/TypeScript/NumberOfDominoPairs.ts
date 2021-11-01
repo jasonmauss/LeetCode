@@ -4,14 +4,14 @@ function numEquivDominoPairs(dominoes: number[][]): number {
     let dominoMap = new Map();
     let pairCount = 0;
 
-    for (let [a , b] of dominoes) {
+    for (let [num1 , num2] of dominoes) {
 
-        let key = a < b ? `${a}${b}` : `${b}${a}`;
+        let key = num1 < num2 ? `${num1}${num2}` : `${num2}${num1}`;
 
         if (dominoMap.has(key)) {
-            let currentIndex = dominoMap.get(key) + 1;
-            dominoMap.set(key, currentIndex);
-            pairCount += currentIndex;
+            let currentPairCount = dominoMap.get(key) + 1;
+            dominoMap.set(key, currentPairCount);
+            pairCount += currentPairCount;
         } else {
             dominoMap.set(key, 0);
         }

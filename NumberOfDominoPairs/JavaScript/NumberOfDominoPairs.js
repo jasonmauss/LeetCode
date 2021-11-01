@@ -3,12 +3,12 @@ function numEquivDominoPairs(dominoes) {
     var dominoMap = new Map();
     var pairCount = 0;
     for (var _i = 0, dominoes_1 = dominoes; _i < dominoes_1.length; _i++) {
-        var _a = dominoes_1[_i], a = _a[0], b = _a[1];
-        var key = a < b ? "" + a + b : "" + b + a;
+        var _a = dominoes_1[_i], num1 = _a[0], num2 = _a[1];
+        var key = num1 < num2 ? "" + num1 + num2 : "" + num2 + num1;
         if (dominoMap.has(key)) {
-            var currentIndex = dominoMap.get(key) + 1;
-            dominoMap.set(key, currentIndex);
-            pairCount += currentIndex;
+            var currentPairCount = dominoMap.get(key) + 1;
+            dominoMap.set(key, currentPairCount);
+            pairCount += currentPairCount;
         }
         else {
             dominoMap.set(key, 0);
