@@ -6,7 +6,7 @@ const countBalls = (lowLimit: number, highLimit: number): number => {
     for(let i:number = lowLimit; i <= highLimit; i++) {
         let boxNumber:number = getBoxNumberFromBallNumber(i);
         let box:number = boxes.get(boxNumber);
-        if(box !== null) {
+        if(box) {
             boxes.set(boxNumber, box + 1);
         } else {
             boxes.set(boxNumber, 1);

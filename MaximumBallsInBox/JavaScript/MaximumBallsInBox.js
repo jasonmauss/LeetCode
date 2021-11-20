@@ -4,7 +4,7 @@ var countBalls = function (lowLimit, highLimit) {
     for (var i = lowLimit; i <= highLimit; i++) {
         var boxNumber = getBoxNumberFromBallNumber(i);
         var box = boxes.get(boxNumber);
-        if (box !== null) {
+        if (box) {
             boxes.set(boxNumber, box + 1);
         }
         else {
