@@ -5,7 +5,7 @@ const uniqueOccurrences = (arr: number[]): boolean => {
 
     for(let i:number = 0; i < arr.length; i++) {
         if(occurrenceMap.has(arr[i])) {
-            occurrenceMap[arr[i]]++;
+            occurrenceMap.set(arr[i], occurrenceMap.get(arr[i]) + 1);
         } else {
             occurrenceMap.set(arr[i], 1);
         }
