@@ -13,31 +13,37 @@
 
  const isCousins = (root: TreeNode | null, x: number, y: number): boolean => {
 
-    const queue = [root];
-  while (queue.length) {
-    const size = queue.length;
-    let foundX = false;
-    let foundY = false;
-    // iterate through one level
-    for (let i = 0; i < size; i++) {
-      const node = queue.shift();
-      // check if children are x and y
-      if (node.left && node.right) {
-        if (
-          (node.left.val === x && node.right.val === y) ||
-          (node.left.val === y && node.right.val === x)
-        )
-          return false;
-      }
-      // find x and y at the same level
-      if (node.val === x) foundX = true;
-      if (node.val === y) foundY = true;
-      if (node.left) queue.push(node.left);
-      if (node.right) queue.push(node.right);
+    const tree = [root];
+
+    while (tree.length) {
+        
+        const length:number = tree.length;
+        let foundX:boolean = false;
+        let foundY:boolean = false;
+
+        // check the first level
+        for (let i:number = 0; i < length; i++) {
+        
+            const curNode = tree.shift();
+            // check if the two nodes children are x and y
+            // if they are, they're not cousins so return false
+            if (curNode.left && curNode.right) {
+                if ((curNode.left.val === x && curNode.right.val === y) ||
+                    (curNode.left.val === y && curNode.right.val === x))
+                    return false;
+            }
+
+            // find x and y at the same level
+            if (curNode.val === x) foundX = true;
+            if (curNode.val === y) foundY = true;
+            if (curNode.left) tree.push(curNode.left);
+            if (curNode.right) tree.push(curNode.right);
+        }
+        
+        if (foundX && foundY) return true;
     }
-    if (foundX && foundY) return true;
-  }
-  return false;
+
+    return false;
 };
 
 // some test cases

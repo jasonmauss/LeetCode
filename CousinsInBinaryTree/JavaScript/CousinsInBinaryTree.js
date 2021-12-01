@@ -8,29 +8,30 @@ var TreeNode = /** @class */ (function () {
     return TreeNode;
 }());
 var isCousins = function (root, x, y) {
-    var queue = [root];
-    while (queue.length) {
-        var size = queue.length;
+    var tree = [root];
+    while (tree.length) {
+        var length_1 = tree.length;
         var foundX = false;
         var foundY = false;
-        // iterate through one level
-        for (var i = 0; i < size; i++) {
-            var node = queue.shift();
-            // check if children are x and y
-            if (node.left && node.right) {
-                if ((node.left.val === x && node.right.val === y) ||
-                    (node.left.val === y && node.right.val === x))
+        // check the first level
+        for (var i = 0; i < length_1; i++) {
+            var curNode = tree.shift();
+            // check if the two nodes children are x and y
+            // if they are, they're not cousins so return false
+            if (curNode.left && curNode.right) {
+                if ((curNode.left.val === x && curNode.right.val === y) ||
+                    (curNode.left.val === y && curNode.right.val === x))
                     return false;
             }
             // find x and y at the same level
-            if (node.val === x)
+            if (curNode.val === x)
                 foundX = true;
-            if (node.val === y)
+            if (curNode.val === y)
                 foundY = true;
-            if (node.left)
-                queue.push(node.left);
-            if (node.right)
-                queue.push(node.right);
+            if (curNode.left)
+                tree.push(curNode.left);
+            if (curNode.right)
+                tree.push(curNode.right);
         }
         if (foundX && foundY)
             return true;
