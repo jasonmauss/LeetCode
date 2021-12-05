@@ -1,7 +1,13 @@
 // Solution for: https://leetcode.com/problems/maximum-repeating-substring/
 const maxRepeating = (sequence: string, word: string): number => {
 
-    return 0;
+    let returnVal:number = 0;
+
+	while (sequence.includes(word.repeat(returnVal + 1))) {
+		returnVal += 1;
+	};
+
+	return returnVal;
 
 };
 
