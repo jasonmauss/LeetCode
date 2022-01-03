@@ -1,8 +1,24 @@
 // Solution for: https://leetcode.com/problems/non-overlapping-intervals/
 const eraseOverlapIntervals = (intervals: number[][]): number => {
 
-    return 0;
+    let result:number = -1;
 
+    if(intervals.length < 2) return 0;
+
+    intervals.sort((a, b) => a[1] - b[1]);
+
+    let curInterval = intervals[0];
+
+
+    for(let i of intervals) {
+        if(curInterval[1] > i[0]) {
+            result++
+        } else {
+            curInterval = i;
+        }
+    }
+
+    return result;
 };
 
 // some test cases
