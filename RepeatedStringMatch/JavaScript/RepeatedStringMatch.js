@@ -2,7 +2,7 @@
 var repeatedStringMatch = function (a, b) {
     var repeatCount = 1;
     var repeatedString = '';
-    while (repeatedString.length <= b.length) {
+    while (repeatedString.length <= b.length + a.length) {
         repeatedString = a.repeat(repeatCount);
         if (repeatedString.indexOf(b) > -1)
             return repeatCount;
@@ -13,4 +13,4 @@ var repeatedStringMatch = function (a, b) {
 // some test cases
 console.log(repeatedStringMatch("abcd", "cdabcdab")); // 3
 console.log(repeatedStringMatch("a", "aa")); // 2
-console.log(repeatedStringMatch("rra", "rrarrarrarra")); // 4
+console.log(repeatedStringMatch("abc", "cabcabca")); // 4
