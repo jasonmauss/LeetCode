@@ -4,7 +4,7 @@ const repeatedStringMatch = (a: string, b: string): number => {
     let repeatCount:number = 1;
     let repeatedString:string = '';
 
-    while(repeatedString.length <= b.length) {
+    while(repeatedString.length <= b.length + a.length) {
         repeatedString = a.repeat(repeatCount);
         if(repeatedString.indexOf(b) > -1) return repeatCount;
         repeatCount++;    
