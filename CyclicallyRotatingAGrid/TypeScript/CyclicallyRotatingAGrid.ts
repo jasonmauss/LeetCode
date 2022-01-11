@@ -1,5 +1,5 @@
 // Solution for: https://leetcode.com/problems/cyclically-rotating-a-grid/
-function rotateArray(arr, k) {
+const rotateArray = (arr, k) => {
     k = k % arr.length;
 
     let rotatedArr = new Array(arr.length);
