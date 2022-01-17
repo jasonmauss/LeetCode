@@ -1,23 +1,23 @@
 // Solution for: https://leetcode.com/problems/cheapest-flights-within-k-stops/
 const findCheapestPrice = (n: number, flights: number[][], src: number, dst: number, k: number): number => {
 
-    let mn:number[] = new Array(n + 1).fill(Infinity);
-    mn[src] = 0;
+    let min:number[] = new Array(n + 1).fill(Infinity);
+    min[src] = 0;
 
     for(let j:number = 0; j < k + 1; j++){
         
-        let newmn:number[] = [].concat(mn);
+        let newmin:number[] = [].concat(min);
 
         for(let i:number = 0; i < flights.length; i++) {
             let f:number[] = flights[i], a:number = f[0], b:number = f[1], c:number = f[2];
-            newmn[b] = Math.min(newmn[b], mn[a] + c);
+            newmin[b] = Math.min(newmin[b], min[a] + c);
         }
         
-        mn = [].concat(newmn);
+        min = [].concat(newmin);
 
     }
 
-    return mn[dst] != Infinity ? mn[dst] : -1
+    return min[dst] != Infinity ? min[dst] : -1
 
 };
 
