@@ -1,7 +1,21 @@
 // Solution for: https://leetcode.com/problems/partition-array-into-disjoint-intervals/
 const partitionDisjoint = (nums: number[]): number => {
 
-    return 0;
+    let lastVal:number = 0;
+    let leftMaxValue:number = nums[0];
+    let rightMaxValue= null;
+
+    for(let i:number = 1; i < nums.length; i++) {
+        let currentValue:number = nums[i];
+        if(currentValue >= leftMaxValue) {
+            rightMaxValue = Math.max(rightMaxValue || - Number.MAX_VALUE, currentValue);
+        } else {
+            lastVal = i;
+            leftMaxValue = Math.max(leftMaxValue, rightMaxValue || -Number.MAX_VALUE);
+        }
+    }
+
+    return lastVal + 1;
 
 };
 
