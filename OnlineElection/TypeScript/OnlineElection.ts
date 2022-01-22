@@ -1,7 +1,12 @@
 // Solution for: https://leetcode.com/problems/online-election/
 class TopVotedCandidate {
-    constructor(persons: number[], times: number[]) {
+    
+    private _persons:number[];
+    private _times:number[];
 
+    constructor(persons: number[], times: number[]) {
+        this._persons = persons;
+        this._times = times;    
     }
 
     q(t: number): number {
