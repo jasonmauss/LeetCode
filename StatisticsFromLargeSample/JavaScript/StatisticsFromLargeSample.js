@@ -1,37 +1,46 @@
 // Solution for: https://leetcode.com/problems/statistics-from-a-large-sample/
-const mostCommonNumber = (numbers) => {
-    let counted = numbers.reduce((acc, curr) => {
-        if (curr in acc) {
-            acc[curr]++;
-        }
-        else {
-            acc[curr] = 1;
-        }
-        return acc;
-    }, {});
-    let mode = Object.keys(counted).reduce((a, b) => counted[a] > counted[b] ? a : b);
-    return parseInt(mode);
-};
 const sampleStats = (count) => {
+    const countLength = count.length;
+    let totalValues = 0;
+    let minValue = countLength - 1;
+    let maxValue = 0;
+    let modValue = 0;
+    let indexofModValue = 0;
     let result = [];
-    let sample = [];
-    for (let i = 0; i < count.length; i++) {
+    for (let i = 0; i < countLength; i++) {
         if (count[i] > 0) {
-            sample.push(...new Array(count[i]).fill(i));
+            minValue = Math.min(i, minValue);
+            maxValue = Math.max(i, maxValue);
+            totalValues += count[i];
+            if (count[i] > modValue) {
+                modValue = count[i];
+                indexofModValue = i;
+            }
         }
     }
-    result.push(Math.min(...sample));
-    result.push(Math.max(...sample));
-    let sampleTotal = sample.reduce((a, b) => a + b, 0);
-    result.push(sampleTotal / sample.length);
-    let half = Math.floor(sample.length / 2);
-    if (sample.length % 2) {
-        result.push(sample[half]);
+    result.push(...[minValue, maxValue]);
+    let sum = count.reduce((acc, cur, ind) => acc + (ind * cur), 0);
+    let len = count.reduce((acc, cur, ind) => acc + cur, 0);
+    result.push(sum / len);
+    const half = Math.floor(totalValues / 2);
+    let median = 0;
+    for (let i = 0, tempTotal = 0, lastIndex = 0; i < countLength; i++) {
+        if (count[i]) {
+            tempTotal += count[i];
+            if (tempTotal > half) {
+                if (totalValues % 2 === 0 && (tempTotal - count[i] === half)) {
+                    median = (i + lastIndex) / 2.0;
+                }
+                else {
+                    median = i;
+                }
+                break;
+            }
+            lastIndex = i;
+        }
     }
-    else {
-        result.push((sample[half - 1] + sample[half]) / 2.0);
-    }
-    result.push(mostCommonNumber(sample));
+    result.push(median);
+    result.push(indexofModValue);
     return result;
 };
 // some test cases

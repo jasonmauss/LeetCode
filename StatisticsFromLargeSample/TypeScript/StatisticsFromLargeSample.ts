@@ -1,47 +1,54 @@
 // Solution for: https://leetcode.com/problems/statistics-from-a-large-sample/
-const mostCommonNumber = (numbers:number[]): number => {
-    
-    let counted = numbers.reduce((acc, curr) => { 
-        if (curr in acc) {
-            acc[curr]++;
-        } else {
-            acc[curr] = 1;
-        }
-
-        return acc;
-        
-    }, {});
-
-    let mode = Object.keys(counted).reduce((a, b) => counted[a] > counted[b] ? a : b);
-
-    return parseInt(mode);
-}
-
 const sampleStats = (count: number[]): number[] => {
 
-    let result:number[] = [];
-    let sample:number[] = [];
+    const countLength:number = count.length;
+    let totalValues:number = 0;
+    let minValue = countLength - 1;
+    let maxValue = 0;
+    let modValue = 0;
+    let indexofModValue = 0;
 
-    for(let i:number = 0; i < count.length; i++) {
+    let result:number[] = [];
+
+    for(let i:number = 0; i < countLength; i++) {
         if(count[i] > 0) {
-            sample.push(...new Array<number>(count[i]).fill(i));
+            minValue = Math.min(i, minValue);
+            maxValue = Math.max(i, maxValue);
+            totalValues += count[i];
+            if(count[i] > modValue) {
+                modValue = count[i];
+                indexofModValue = i;
+            }
         }
     }
 
-    result.push(Math.min(...sample));
-    result.push(Math.max(...sample));
-    let sampleTotal:number = sample.reduce((a, b) => a + b, 0);
-    result.push(sampleTotal / sample.length);
+    result.push(...[minValue, maxValue])
 
-    let half:number = Math.floor(sample.length / 2);
-    if (sample.length % 2) {
-        result.push(sample[half]);
-    } else {
-        result.push((sample[half - 1] + sample[half]) / 2.0);
+    let sum:number = count.reduce((acc, cur, ind) => acc + (ind * cur), 0);
+    let len:number = count.reduce((acc, cur, ind) => acc + cur, 0);
+    result.push(sum / len);
+        
+    const half = Math.floor(totalValues / 2);
+
+    let median:number = 0;
+    for(let i:number = 0, tempTotal:number = 0, lastIndex:number = 0; i < countLength; i++) {
+        if(count[i]) {
+            tempTotal += count[i];
+            if(tempTotal > half) {
+                if(totalValues % 2 === 0 && (tempTotal - count[i] === half)) {
+                    median = (i + lastIndex) / 2.0;
+                } else {
+                    median = i;
+                }
+                break;
+            }
+            lastIndex = i;
+        }
     }
+    result.push(median);
 
-    result.push(mostCommonNumber(sample));
-
+    result.push(indexofModValue);
+    
     return result;
 
 };
