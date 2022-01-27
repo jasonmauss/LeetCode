@@ -1,61 +1,35 @@
-let preSum: number[] = [];
-let memo:number[][][] = [];
-let K:number = 0;
-
 // Solution for: https://leetcode.com/problems/minimum-cost-to-merge-stones/
-const mergeStones = (stones: number[], k: number): number => {    
+const mergeStones = (stones: number[], K: number): number => {    
 
-    if(stones.length === 1) return 0;
-    this.k = K;
-    let stonesLen:number = stones.length;
-    memo = new Array(stonesLen + 1);
-    
-    preSum = new Array<number>(stonesLen + 1);
+    const n = stones.length;
+    if ((n - 1) % (K - 1)) return -1;
 
-    buildPreSum(stones, K);
-
-    let result:number = mergeStonesRecursive(1, stones.length, 1, stones);
-
-    return result === Number.MAX_VALUE ? -1 : result;
-
-};
-
-const buildPreSum = (stones: number[], k: number) => {
-    preSum[0] = 0;
-    for(let i:number = 1; i < preSum.length; i++) {
-        preSum[i] = preSum[i -1] + stones[i - 1];
+    const sums = Array(n + 1).fill(0);
+    for (let i:number = 0; i < n; i++) {
+        sums[i + 1] = sums[i] + stones[i];
     }
-};
 
-const mergeStonesRecursive = (i:number, j:number, targetPiles:number, stones:number[]): number => {
+    // dp[i][j][k] is min cost to merge subarray i ~ j into k piles.
+    const dp = [...Array(n)].map(() => [...Array(n)].map(() => Array(K + 1).fill(Infinity)));
+    for (let i = 0; i < n; i++) {
+        dp[i][i][1] = 0;
+    }
 
-    if(memo[i][j][targetPiles] !== 0) return memo[i][j][targetPiles];
-
-    if(j - i + 1 < targetPiles) return Number.MAX_VALUE;
-    if(i === j) return (targetPiles === 1) ? 0 : Number.MAX_VALUE;
-
-    if(targetPiles === 1) {
-        let subMinCost = mergeStonesRecursive(i, j, K, stones);
-        if(subMinCost !== Number.MAX_VALUE) {
-            memo[i][j][targetPiles] = preSum[j] - preSum[i - 1] + subMinCost;
-        } else {
-            memo[i][j][targetPiles] = subMinCost;
+    for (let l:number = 2; l <= n; l++) { // sub problem length
+        for (let i:number = 0; i <= n - l; i++) { // start
+            const j:number = i + l - 1; // end
+            for (let k:number = 2; k <= K; k++) { // piles
+                for (let m:number = i; m < j; m += K - 1) { // split point
+                    dp[i][j][k] = Math.min(dp[i][j][k], dp[i][m][1] + dp[m + 1][j][k - 1]);
+                }
+            }
+            dp[i][j][1] = dp[i][j][K] + sums[j + 1] - sums[i];
         }
-        return memo[i][j][targetPiles];
     }
 
-    let minCost:number = Number.MAX_VALUE;
-    for(let k:number = i; k <= j - 1; k++) {
-        let leftCost:number = mergeStonesRecursive(i, k, targetPiles - 1, stones);
-        if(leftCost === Number.MAX_VALUE) continue;
-        let rightCost:number = mergeStonesRecursive(k + 1, j, 1, stones);
-        if(rightCost === Number.MAX_VALUE) continue;
-        minCost = Math.min(leftCost + rightCost, minCost);
-    }
+    return dp[0][n - 1][1];
 
-    memo[i][j][targetPiles] = minCost;
-    return minCost;
-}
+};
 
 // some test cases
 console.log(mergeStones([3,2,4,1], 2)); // 20
