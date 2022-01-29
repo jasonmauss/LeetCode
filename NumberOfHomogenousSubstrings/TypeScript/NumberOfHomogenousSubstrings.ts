@@ -1,26 +1,19 @@
 // Solution for: https://leetcode.com/problems/count-number-of-homogenous-substrings/
 const countHomogenous = (s: string): number => {
 
-    let countResult:number = 0;
-    if(s.length === 1) return 1;
-
-    // get a unique set of the chars that appear in the string
-    const uniqueChars:string[] = [...new Set(s.split(''))];
-
-    for(let char of uniqueChars) {
-        let i:number = 1;
-        let indexOf:number = 0;
-        let startIndex = 0;
-        indexOf = s.indexOf(char.repeat(i), startIndex);
-        while(indexOf > -1) {
-            countResult++;
-            startIndex = indexOf + 1;
-            if(s.indexOf(char.repeat(i), startIndex) === -1) i++;
-            indexOf = s.indexOf(char.repeat(i), startIndex);
-        }
+    const MOD = 1e9 + 7;
+    let res = 1;
+    let count = 1;
+    
+    for (let i = 1; i < s.length; i++) {
+        const curr = s.charAt(i);
+        const prev = s.charAt(i - 1);
+        
+        count = curr === prev ? count + 1 : 1;
+        res = (res + count) % MOD;
     }
-
-    return countResult;
+    
+    return res;
 };
 
 
