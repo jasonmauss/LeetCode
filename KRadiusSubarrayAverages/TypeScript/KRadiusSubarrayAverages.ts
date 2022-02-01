@@ -1,7 +1,21 @@
 // Solution for: https://leetcode.com/problems/k-radius-subarray-averages/
 const getAverages = (nums: number[], k: number): number[] => {
 
-    return [0];
+    const doubleK:number = 2 * k;
+    const windowSize:number = doubleK + 1;
+    
+    const result = [...nums].fill(-1);
+    let sum:number = 0;
+
+    for (let i:number = 0; i < nums.length; i++) {
+        sum += nums[i];
+        if (i >= doubleK) {
+            result[i - k] = Math.floor(sum / windowSize)
+            sum -= nums[i - doubleK];
+        }
+    }
+    
+    return result;
 
 };
 
