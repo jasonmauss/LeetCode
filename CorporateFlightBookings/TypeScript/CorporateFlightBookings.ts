@@ -1,7 +1,16 @@
 // Solution for: https://leetcode.com/problems/corporate-flight-bookings/
 const corpFlightBookings = (bookings: number[][], n: number): number[] => {
 
-    return [0];
+    const answer = Array(n).fill(0)
+    
+    for (let i:number = 0; i < bookings.length; i++) {
+        const [first, last, seats] = bookings[i]
+        for (let j:number = first - 1; j < last; j++) {
+            answer[j] += seats;
+        }
+    }
+
+    return answer;
 
 };
 
