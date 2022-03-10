@@ -1,7 +1,38 @@
 // Solution for: https://leetcode.com/problems/furthest-building-you-can-reach/
 const furthestBuilding = (heights: number[], bricks: number, ladders: number): number => {
 
-    return 0;
+    const diffs = [] as number[];
+
+    for (let i = 0; i < heights.length - 1; i++) {
+
+        // check if bricks or ladders are needed
+        const diff = heights[i + 1] - heights[i];
+
+        // go to next building
+        if (diff <= 0) {
+            continue;
+        }
+
+        // add diff
+        diffs.push(diff);
+
+        // use ladders if there are ladders left
+        if (diffs.length <= ladders) {
+            continue;
+        }
+
+        // try to use bricks
+        const minDiff = Math.min(...diffs);
+        diffs.splice(diffs.indexOf(minDiff), 1);
+
+        if (bricks < minDiff) {
+            return i;
+        }
+
+        bricks -= minDiff;
+    }
+
+    return heights.length - 1;
 
 };
 
