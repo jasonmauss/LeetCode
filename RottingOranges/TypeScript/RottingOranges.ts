@@ -14,7 +14,7 @@ const orangesRotting = (grid: number[][]): number => {
     }
 
     let minute = 0;
-    
+
     while (queue.length) {
         const size = queue.length;
         for (let i = 0; i < size; i++) {
@@ -42,6 +42,7 @@ const orangesRotting = (grid: number[][]): number => {
         }
         if (queue.length > 0) minute++;
     }
+    
     return fresh === 0 ? minute : -1;
 
 };
