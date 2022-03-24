@@ -20,4 +20,14 @@ INSERT INTO Seat (id, student) VALUES ('5', 'Jeames')
 -- Solution for: https://leetcode.com/problems/exchange-seats/
 
 
-
+SELECT
+	CASE
+		WHEN seat.id % 2 <> 0 AND seat.id = (SELECT COUNT(*) FROM seat) THEN seat.id
+		WHEN seat.id % 2 = 0 THEN seat.id - 1
+		ELSE
+			seat.id + 1
+	END as id,
+	student 
+FROM seat
+ORDER BY id
+;
