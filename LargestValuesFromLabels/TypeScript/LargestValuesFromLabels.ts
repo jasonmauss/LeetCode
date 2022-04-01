@@ -1,32 +1,33 @@
 // Solution for: https://leetcode.com/problems/largest-values-from-labels/
 const largestValsFromLabels = (values: number[], labels: number[], numWanted: number, useLimit: number): number => {
 
-    let label_usage = new Array(20001).fill(0);
+    // fill an array with objects holding the labels and their values
+    const obj = [];
 
-    let values_labels = values.map((val, ind) => {
-        return [val, labels[ind]];
-    });
+    for(let i:number = 0;i < values.length; i++){
+        obj.push({key:labels[i],value:values[i]})
+    }
+	
+    // sort by their value
+    obj.sort((a,b) => a.value - b.value);
+	
+    const map = new Map();
 
-    values_labels.sort((a, b) => {
-        return b[0] - a[0];
-    });
+    let result:number = 0;
 
-    let picked_values = [];
+    // store the last/max value and it's label in a map and keep
+    // checking if label's usage limit has been reached or not
+    // repeat while there are items in the array and numWanted > 0
+    while(obj.length > 0 && numWanted > 0){
 
-    while (picked_values.length < numWanted && values_labels.length > 0) {
-        let cand = values_labels.shift();
-
-        if (label_usage[cand[1]] < useLimit) {
-            label_usage[cand[1]] += 1;
-            picked_values.push(cand[0]);
-        } else {
-            continue;
+        const lastObj = obj.pop();
+        map.set(lastObj.key, map.get(lastObj.key) + 1 || 1);
+        if(map.get(lastObj.key) <= useLimit) {
+            result += lastObj.value;
+            numWanted--;
         }
     }
-
-    return picked_values.reduce((a, b) => {
-        return a + b;
-    });
+    return result;
 
 };
 
