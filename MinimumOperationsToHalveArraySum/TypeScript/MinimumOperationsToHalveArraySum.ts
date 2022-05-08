@@ -1,7 +1,29 @@
-// Solution for: https://leetcode.com/problems/minimum-operations-to-halve-array-sum/
-const halveArray = (nums: number[]): number => {
+const {
+    MaxPriorityQueue,
+  } = require('@datastructures-js/priority-queue');
 
-    return 0;
+// Solution for: https://leetcode.com/problems/minimum-operations-to-halve-array-sum/
+const halveArray = (nums) => {
+
+    const maxPQ = new MaxPriorityQueue()
+    let sum = 0
+    for (let num of nums) {
+        sum += num
+        maxPQ.enqueue(num)
+    }
+    
+    let afterReduced = sum / 2
+    let cnt = 0
+    
+    while (sum > afterReduced) {
+        const removed = maxPQ.dequeue().element
+        const half = removed / 2
+        sum -= half
+        maxPQ.enqueue(half)
+        cnt++
+    }
+    
+    return cnt++
 
 };
 
