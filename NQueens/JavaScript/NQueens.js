@@ -16,7 +16,7 @@ const isQueenPlacementValid = (gameBoard) => {
 };
 const processQueenChoices = (choices) => {
     const queenChoices = [];
-    for (let i = 0; i < queenChoices.length; i++) {
+    for (let i = 0; i < choices.length; i++) {
         queenChoices.push('');
     }
     for (let i = 0; i < queenChoices.length; i++) {
@@ -52,7 +52,7 @@ const solveNQueens = (n) => {
     if (n === 1)
         return [['Q']];
     if (n === 2)
-        return [[]];
+        return [];
     const gameBoards = getNQueens(n, 0, [], []);
     return gameBoards;
 };
