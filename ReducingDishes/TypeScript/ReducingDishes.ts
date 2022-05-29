@@ -1,7 +1,17 @@
 // Solution for: https://leetcode.com/problems/reducing-dishes/
 const maxSatisfaction = (satisfaction: number[]): number => {
 
-    return 0;
+    satisfaction.sort((a, b) => b - a);
+
+    let output: number = 0;
+    let t: number = 0;
+
+    for (let i = 0; i < satisfaction.length; i++) {
+        t += satisfaction[i];
+        if (t > 0) output += t;
+    }
+
+    return output;
 
 };
 
