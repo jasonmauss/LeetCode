@@ -1,8 +1,24 @@
 // Solution for: https://leetcode.com/problems/number-of-visible-people-in-a-queue/
 const canSeePersonsCount = (heights: number[]): number[] => {
 
-    return [0];
+    const length:number = heights.length;
+    const result:number[] = new Array<number>(length).fill(0);
+    let stack = new Array<number>();
 
+    for(let i:number = 0; i < length; i++) {
+        while(stack.length && heights[i] > heights[stack.at(-1)]) {
+            const index:number = stack.pop();
+            result[index]++;
+        }
+
+        if(stack.length)
+            result[stack.at(-1)]++;
+
+        stack.push(i);
+    }
+
+    return result;
+    
 };
 
 
