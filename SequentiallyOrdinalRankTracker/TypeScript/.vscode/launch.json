@@ -16,5 +16,6 @@
                 "${workspaceFolder}/**/*.js"
             ]
         }
+
     ]
 }
