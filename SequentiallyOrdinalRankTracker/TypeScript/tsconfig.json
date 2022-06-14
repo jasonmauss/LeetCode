@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "system",
+    "moduleResolution": "node",
+    "outDir": "",
+    "sourceMap": true,
+    "lib":["ES2016", "DOM"]
+  }
+}
