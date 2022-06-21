@@ -1,36 +1,27 @@
 // Solution for: https://leetcode.com/problems/sequentially-ordinal-rank-tracker/
-class SORTracker {
-    count;
-    locations;
-    constructor() {
+var Item = /** @class */ (function () {
+    function Item() {
+    }
+    return Item;
+}());
+var SORTracker = /** @class */ (function () {
+    function SORTracker() {
+        var _this = this;
+        this.add = function (name, score) {
+            _this.minQ.enqueue([score, name]);
+            _this.maxQ.enqueue(_this.minQ.dequeue());
+        };
+        this.get = function () {
+            var maxElement = _this.maxQ.dequeue();
+            _this.minQ.enqueue(maxElement);
+            return maxElement[1];
+        };
         this.count = 0;
-        this.locations = [];
+        this.minQ = new MinPriorityQueue(function (item) { return item.score; });
+        this.maxQ = new MaxPriorityQueue(function (item) { return item.score; });
     }
-    add(name, score) {
-        if (!this.locations[score]) {
-            this.locations[score] = [name];
-        }
-        else {
-            this.locations[score].push(name);
-            this.locations[score].sort();
-        }
-    }
-    get() {
-        let copyCount = this.count;
-        let result;
-        for (let i = this.locations.length - 1;; i--) {
-            if (!this.locations[i])
-                continue;
-            if (this.locations[i].length - 1 >= copyCount) {
-                result = this.locations[i][copyCount];
-                break;
-            }
-            copyCount = copyCount - this.locations[i].length;
-        }
-        this.count++;
-        return result;
-    }
-}
+    return SORTracker;
+}());
 /**
  * Your SORTracker object will be instantiated and called as such:
  * var obj = new SORTracker()
