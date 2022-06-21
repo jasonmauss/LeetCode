@@ -5,6 +5,7 @@
     "moduleResolution": "node",
     "outDir": "",
     "sourceMap": true,
+    "strict": false,
     "lib":["ES2016", "DOM"]
   }
 }
