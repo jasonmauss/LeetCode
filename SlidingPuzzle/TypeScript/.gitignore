@@ -4,5 +4,7 @@ jspm_packages/
 
 # Output directory from TypeScript compiler
 out/
-SlidingPuzzle/TypeScript/package.json
-SlidingPuzzle/TypeScript/package-lock.json
+
+# JS files produced by the TypeScript compiler (TSC)
+*.js
+*.js.map
