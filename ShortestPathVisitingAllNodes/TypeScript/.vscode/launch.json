@@ -11,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\NumberOfWaysToPaintGrid.js",
+            "program": "${workspaceFolder}\\ShortestPathVisitingAllNodes.js",
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ]
