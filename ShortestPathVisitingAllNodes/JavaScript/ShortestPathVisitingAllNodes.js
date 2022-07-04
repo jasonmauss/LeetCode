@@ -1,16 +1,35 @@
 // Solution for: https://leetcode.com/problems/number-of-ways-to-paint-n-3-grid/
-var numOfWays = function (n) {
-    var colors3 = 6;
-    var colors2 = 6;
-    var next2, next3;
-    for (var i = 2; i <= n; i++) {
-        next2 = 3 * colors2 + 2 * colors3;
-        next3 = 2 * colors2 + 2 * colors3;
-        colors2 = next2 % 1000000007;
-        colors3 = next3 % 1000000007;
+var shortestPathLength = function (graph) {
+    var graphLength = graph.length;
+    var queue = [];
+    var set = new Set();
+    var finish = (1 << graphLength) - 1;
+    for (var i = 0; i < graphLength; i++) {
+        var tempMask = (1 << i);
+        set.add(tempMask | (1 << (i + 16)));
+        queue.push({ mask: tempMask, node: i, cost: 0 });
     }
-    return (colors3 + colors2) % 1000000007;
+    var curr, neighbors, key, bitMask, cost;
+    while (queue.length) {
+        curr = queue.shift();
+        if (curr.mask === finish) {
+            return curr.cost;
+        }
+        else {
+            neighbors = graph[curr.node];
+            cost = curr.cost + 1;
+            for (var _i = 0, neighbors_1 = neighbors; _i < neighbors_1.length; _i++) {
+                var neighbor = neighbors_1[_i];
+                bitMask = curr.mask | (1 << neighbor);
+                key = bitMask | (1 << (neighbor + 16));
+                if (!set.has(key)) {
+                    queue.push({ mask: bitMask, node: neighbor, cost: cost });
+                    set.add(key);
+                }
+            }
+        }
+    }
+    return -1;
 };
-// some test cases
-console.log(numOfWays(1)); // 12
-console.log(numOfWays(5000)); // 30228214
+console.log(shortestPathLength([[1, 2, 3], [0], [0], [0]])); // 4
+console.log(shortestPathLength([[1], [0, 2, 4], [1, 3, 4], [2], [1, 2]])); // 4
