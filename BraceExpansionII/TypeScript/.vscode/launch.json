@@ -11,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\UniquePathsIII.js",
+            "program": "${workspaceFolder}\\BraceExpansionII.js",
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ]
