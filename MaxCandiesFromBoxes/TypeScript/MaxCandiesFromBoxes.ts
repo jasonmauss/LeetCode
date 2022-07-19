@@ -1,7 +1,35 @@
 // Solution for: https://leetcode.com/problems/maximum-candies-you-can-get-from-boxes/
 const maxCandies = (status: number[], candies: number[], keys: number[][], containedBoxes: number[][], initialBoxes: number[]): number => {
 
-    return 0;
+    let boxesHeld = new Set(initialBoxes);
+    let candyCount = 0;
+    let eventOccured = true;
+    
+    while (eventOccured) {
+
+        eventOccured = false;
+        
+        for (let box of boxesHeld) {
+        
+            if (status[box] === 1) {
+            
+                status[box] = 2;
+                boxesHeld.delete(box);
+                eventOccured = true;
+                candyCount += candies[box];
+                
+                for (let key of keys[box]) {
+                    if (status[key] === 0) status[key] = 1;
+                }
+                
+                for (let innerBox of containedBoxes[box]) {
+                    if (status[innerBox] < 2) boxesHeld.add(innerBox);
+                }
+            }
+        }
+    }
+
+    return candyCount;
 
 };
 
