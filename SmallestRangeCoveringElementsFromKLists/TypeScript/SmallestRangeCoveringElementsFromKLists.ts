@@ -1,7 +1,45 @@
 // Solution for: https://leetcode.com/problems/smallest-range-covering-elements-from-k-lists/
 const smallestRange = (nums: number[][]): number[] => {
 
-    return [0];
+    let orderedRange = [];
+    let answer = [];
+
+    for (let i = 0; i < nums.length; i++) {
+        for (let j = 0; j < nums[i].length; j++) {
+            orderedRange.push([nums[i][j], i + 1]);
+            }
+    }
+
+    orderedRange = orderedRange.sort((a, b) => a[0] - b[0]);
+
+    let rangeStart = 0
+    let rangeEnd = 0;
+    let uniqueGroups = nums.length;
+    let totalCountOfUniqueGroups = 0;
+    let groupMap = {}
+
+    while (rangeEnd < orderedRange.length) {
+        const currentElement = orderedRange[rangeEnd];
+        if (!groupMap[currentElement[1]]) {
+            totalCountOfUniqueGroups++;
+        }
+
+        groupMap[currentElement[1]] = (groupMap[currentElement[1]] || 0) + 1;
+
+        if (totalCountOfUniqueGroups === uniqueGroups) {
+            while (groupMap[orderedRange[rangeStart][1]] > 1) {
+                groupMap[orderedRange[rangeStart][1]]--; //minialize range
+                rangeStart++;
+            }
+            if (answer.length === 0 || (answer[1] - answer[0] > orderedRange[rangeEnd][0] - orderedRange[rangeStart][0])) {
+                answer = [orderedRange[rangeStart][0], orderedRange[rangeEnd][0]]
+            }
+        }
+
+        rangeEnd++;
+    }
+
+    return answer;
 
 };
 
