@@ -1,8 +1,15 @@
 // Solution for: https://leetcode.com/problems/poor-pigs/
 const poorPigs = (buckets: number, minutesToDie: number, minutesToTest: number): number => {
 
-    return 0;
+    let steps = Math.ceil(minutesToTest / minutesToDie);
+    let total = 1;
+    let result = 0;
+    while (total < buckets) {
+        total = total * (steps + 1);
+        result++;
+    }
 
+    return result;
 };
 
 
