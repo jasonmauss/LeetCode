@@ -1,6 +1,11 @@
 // Solution for: https://leetcode.com/problems/check-if-it-is-a-good-array/
 const isGoodArray = (nums) => {
-    return false;
+    let result = nums.shift();
+    for (let i of nums) {
+        while (i)
+            [result, i] = [i, result % i];
+    }
+    return result === 1;
 };
 // some test cases
 console.log(isGoodArray([12, 5, 7, 23])); // true
