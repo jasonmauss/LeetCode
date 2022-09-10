@@ -35,7 +35,7 @@ class Expression {
         }
     }
     product(exp1 = new Expression) {
-        let exp = new Expression;
+        let exp = new Expression();
         this.children.forEach(x => {
             exp1.children.forEach(y => {
                 exp.addUnit(x.product(y));
@@ -49,10 +49,10 @@ class Expression {
     }
     toArray() {
         let group = new Map();
-        for (let x of this.children) {
-            if (!group.has(x.val.length))
-                group.set(x.val.length, []);
-            x.count != 0 && group.get(x.val.length).push(x);
+        for (let child of this.children) {
+            if (!group.has(child.val.length))
+                group.set(child.val.length, []);
+            child.count != 0 && group.get(child.val.length).push(child);
         }
         let groupArr = [...group.entries()].sort((a, b) => b[0] - a[0]);
         return groupArr.map(([_, x]) => {
@@ -61,44 +61,47 @@ class Expression {
         }).flat();
     }
 }
-function toTokens(str = '') {
-    let tokens = [], tmp = '', keyWords = {
+const expressionToTokens = (expression = '') => {
+    let tokens = [];
+    let tokenCharsBuffer = '';
+    let keywords = {
         '(': true,
         ')': true,
         '+': true,
         '*': true,
     };
-    for (let char of str) {
-        if (keyWords[char]) {
-            if (tmp)
-                tokens.push(tmp);
+    for (let char of expression) {
+        if (keywords[char]) {
+            if (tokenCharsBuffer)
+                tokens.push(tokenCharsBuffer);
             tokens.push(char);
-            tmp = '';
+            tokenCharsBuffer = '';
             continue;
         }
         if (char == ' ') {
-            if (tmp) {
-                tokens.push(tmp);
-                tmp = '';
+            if (tokenCharsBuffer) {
+                tokens.push(tokenCharsBuffer);
+                tokenCharsBuffer = '';
             }
             continue;
         }
-        tmp += char;
+        tokenCharsBuffer += char;
     }
-    if (tmp)
-        tokens.push(tmp);
+    if (tokenCharsBuffer)
+        tokens.push(tokenCharsBuffer);
     return tokens;
-}
-function toVarDic(keys = [], vals = []) {
-    let dic = new Map;
+};
+const toVarDict = (keys = [], vals = []) => {
+    let dict = new Map();
     for (let i = 0; i < keys.length; i++) {
-        dic.set(keys[i], vals[i]);
+        dict.set(keys[i], vals[i]);
     }
-    return dic;
-}
+    return dict;
+};
 const basicCalculatorIV = (expression, evalvars, evalints) => {
-    let tokens = toTokens(expression)
-        .map(x => /^\d+$/.test(x) ? Number.parseInt(x) : x), vals = toVarDic(evalvars, evalints), i = 0;
+    let tokens = expressionToTokens(expression).map(x => /^\d+$/.test(x.toString()) ? Number.parseInt(x.toString()) : x);
+    let vals = toVarDict(evalvars, evalints);
+    let i = 0;
     let exp = nextExp();
     return exp.toArray();
     function nextExp() {
@@ -140,31 +143,28 @@ const basicCalculatorIV = (expression, evalvars, evalints) => {
             }
         }
     }
-    /**
-     * @returns {Expression}
-     */
     function nextUnit() {
         if (i >= tokens.length)
             return undefined;
-        let rtn;
+        let returnValue;
         if (tokens[i] == '(') {
             i++;
             return nextExp();
         }
         else if (Number.isInteger(tokens[i]))
-            rtn = new Expression([
+            returnValue = new Expression([
                 new Unit(tokens[i], [])
             ]);
-        else if (vals.has(tokens[i]))
-            rtn = new Expression([
-                new Unit(vals.get(tokens[i]), [])
+        else if (vals.has(tokens[i].toString()))
+            returnValue = new Expression([
+                new Unit(vals.get(tokens[i].toString()), [])
             ]);
         else
-            rtn = new Expression([
+            returnValue = new Expression([
                 new Unit(1, [tokens[i]])
             ]);
         i++;
-        return rtn;
+        return returnValue;
     }
     function nextOperator() {
         if (i >= tokens.length)
