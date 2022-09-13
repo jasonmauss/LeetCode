@@ -1,7 +1,26 @@
 // Solution for:https://leetcode.com/problems/minimum-initial-energy-to-finish-tasks/
 const minimumEffort = (tasks: number[][]): number => {
 
-    return 0;
+    let minEffort = 0;
+    let currentEffort = 0;
+
+    // sort by the difference in energy between task energy and required energy
+    tasks.sort((a,b) => (b[1] - b[0]) - (a[1] - a[0]));
+    currentEffort = tasks[0][1];
+    minEffort = currentEffort;
+
+    for(let i = 0 ; i < tasks.length; i++) {
+        if(currentEffort < tasks[i][1]){
+            let increaseNeeded = tasks[i][1] - currentEffort;
+            currentEffort += increaseNeeded;
+            minEffort += increaseNeeded;
+        }
+        
+        currentEffort -= tasks[i][0];
+    
+    }
+
+    return minEffort;
 
 };
 
