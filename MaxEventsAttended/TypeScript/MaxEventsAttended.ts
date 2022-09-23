@@ -1,7 +1,31 @@
 // Solution for: https://leetcode.com/problems/maximum-number-of-events-that-can-be-attended-ii/
 const maxValue = (events: number[][], k: number): number => {
 
-    return 0;
+    let eventValues = Array.from({length: k + 1}, (_) => Array(events.length).fill(0));
+
+    events.sort((b, a) => b[0] > a[0] ? 1 : -1);
+
+    const findEventValue = (index, maxEvents):number => {
+
+        if (maxEvents == 0 || index == events.length) return 0;
+
+        let nextIndex;
+
+        if (!eventValues[maxEvents][index]) {
+            eventValues[maxEvents][index] = findEventValue(index + 1, maxEvents);
+            for (let i = index + 1; i < events.length; i++)
+                if (events[index][1] < events[i][0]) {
+                    nextIndex = i;
+                    break;
+                }
+            
+                eventValues[maxEvents][index] = Math.max(eventValues[maxEvents][index], events[index][2] + (nextIndex ? findEventValue(nextIndex, maxEvents - 1) : 0));
+        }
+
+        return eventValues[maxEvents][index];
+    }
+
+    return findEventValue(0, k);
 
 };
 
