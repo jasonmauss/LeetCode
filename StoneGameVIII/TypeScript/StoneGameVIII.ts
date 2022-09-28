@@ -1,7 +1,22 @@
 // Solution for: https://leetcode.com/problems/stone-game-viii/
 const stoneGameVIII = (stones: number[]): number => {
 
-    return 0;
+    let n = stones.length
+    let prefix = [0]
+    let dp = [...Array(n)];
+
+    for(let i = 0; i < n;i++)
+        prefix.push(prefix[prefix.length-1] + stones[i]);
+
+    let bestRight = prefix[n]
+    let bestCurrent = 0;
+
+    for(let i = n - 2;i >= 0;i--)
+        bestCurrent = bestRight,
+		//update what you re going to use in the future
+        bestRight = Math.max(bestRight, prefix[i+1] - bestCurrent)
+
+    return bestCurrent;
 
 };
 
