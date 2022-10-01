@@ -36,7 +36,7 @@ const countOfAtoms = (formula: string): string => {
     return Object.entries(cur).sort((a,b) => a[0].localeCompare(b[0])).reduce((r, [key, val]) => r += `${key}${val === 1 ? '' : val}`, "");
     
     
-    function readNextElement(charPos) {
+    function readNextElement(charPos:number):any[] {
         if (!formula[charPos].match(/[A-Z]/)) return null;
         let res = formula[charPos++];
         while (formula[charPos]?.match(/[a-z]/)) {
@@ -46,7 +46,7 @@ const countOfAtoms = (formula: string): string => {
         return [res, charPos];
     }
     
-    function readNextDigit(charPos) {
+    function readNextDigit(charPos:number): any[] {
         if (!formula[charPos]?.match(/[0-9]/)) return [1, charPos];
         let res = 0;
         while (formula[charPos]?.match(/[0-9]/)) {
