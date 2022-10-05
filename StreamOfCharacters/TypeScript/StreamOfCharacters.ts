@@ -1,14 +1,78 @@
 // Solution for: https://leetcode.com/problems/stream-of-characters/
+// The hint mentioned using a Trie so let's give that a shot
+interface Trie {
+    children: Array<Trie>;
+    isEndNode: boolean;
+}
+
+let firstOrdinalValue = 'a'.charCodeAt(0);
+let totalCharArraySize = 'z'.charCodeAt(0) - firstOrdinalValue;
+
 class StreamChecker {
 
-    private _words:string[];
+    _trie: Trie;
+    _current: Trie[]; 
+
+    addTrieEntry(trie: Trie, charToAdd:string, isEndNode:boolean = false): Trie {
+        let charPos = charToAdd.charCodeAt(0) - firstOrdinalValue;
+        if(trie.children[charPos]) {
+            trie.children[charPos] = trie.children[charPos]
+        } else {
+            trie.children[charPos] = {
+                isEndNode,
+                children: new Array(totalCharArraySize)
+            }
+        }
+
+        return trie.children[charPos];
+    }
 
     constructor(words: string[]) {
-        this._words = words;
+        
+        this._trie = {
+            isEndNode: false,
+            children: new Array(totalCharArraySize)
+        };
+
+        for(let i = 0; i < words.length; i++) {
+            let t = this._trie;
+            for(let j = 0; j < words[i].length; j++) {
+                t = this.addTrieEntry(t, words[i][j]);
+            }
+            t.isEndNode = true;
+        }
+        this._current = [];
+
     }
 
     query(letter: string): boolean {
-        return false;
+        let returnValue: boolean = false;
+        let valuesToRemove: number[] = [];
+        let charPos = letter.charCodeAt(0) - firstOrdinalValue;
+
+        for(let i = 0; i < this._current.length; i++) {
+            if(this._current[i].children[charPos]) {
+                this._current[i] = this._current[i].children[charPos];
+                if(this._current[i].isEndNode) {
+                    returnValue = true;
+                }
+            } else {
+                valuesToRemove.push(i);
+            }
+        }
+
+        for(let i = valuesToRemove.length - 1; i >= 0; i--) {
+            this._current.splice(valuesToRemove[i], 1);
+        }
+
+        if(this._trie.children[charPos]) {
+            this._current.push(this._trie.children[charPos]);
+            if(this._trie.children[charPos].isEndNode) {
+                returnValue = true;
+            }
+        }
+
+        return returnValue;
     }
 }
 

@@ -1,10 +1,58 @@
-// Solution for: https://leetcode.com/problems/stream-of-characters/
+let firstOrdinalValue = 'a'.charCodeAt(0);
+let totalCharArraySize = 'z'.charCodeAt(0) - firstOrdinalValue;
 class StreamChecker {
     constructor(words) {
-        this._words = words;
+        this._trie = {
+            isEndNode: false,
+            children: new Array(totalCharArraySize)
+        };
+        for (let i = 0; i < words.length; i++) {
+            let t = this._trie;
+            for (let j = 0; j < words[i].length; j++) {
+                t = this.addTrieEntry(t, words[i][j]);
+            }
+            t.isEndNode = true;
+        }
+        this._current = [];
+    }
+    addTrieEntry(trie, charToAdd, isEndNode = false) {
+        let charPos = charToAdd.charCodeAt(0) - firstOrdinalValue;
+        if (trie.children[charPos]) {
+            trie.children[charPos] = trie.children[charPos];
+        }
+        else {
+            trie.children[charPos] = {
+                isEndNode,
+                children: new Array(totalCharArraySize)
+            };
+        }
+        return trie.children[charPos];
     }
     query(letter) {
-        return false;
+        let returnValue = false;
+        let valuesToRemove = [];
+        let charPos = letter.charCodeAt(0) - firstOrdinalValue;
+        for (let i = 0; i < this._current.length; i++) {
+            if (this._current[i].children[charPos]) {
+                this._current[i] = this._current[i].children[charPos];
+                if (this._current[i].isEndNode) {
+                    returnValue = true;
+                }
+            }
+            else {
+                valuesToRemove.push(i);
+            }
+        }
+        for (let i = valuesToRemove.length - 1; i >= 0; i--) {
+            this._current.splice(valuesToRemove[i], 1);
+        }
+        if (this._trie.children[charPos]) {
+            this._current.push(this._trie.children[charPos]);
+            if (this._trie.children[charPos].isEndNode) {
+                returnValue = true;
+            }
+        }
+        return returnValue;
     }
 }
 /**
