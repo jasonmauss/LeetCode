@@ -1,31 +1,50 @@
 // Solution for: https://leetcode.com/problems/sliding-window-median/
-const findMedian = (arr) => {
-    // get copy of the original array
-    const a = arr.slice();
-    // sort it
-    a.sort((a, b) => a - b);
-    const n = a.length;
-    const middle = a[Math.floor(n / 2)];
-    // find the mean based on length of the array of numbers
-    if ((n & 1) !== 0) {
-        return middle;
+const binaryInsertion = (arr, target) => {
+    let left = 0;
+    let right = arr.length;
+    while (left < right) {
+        const mid = (left + right) >> 1;
+        if (target > arr[mid]) {
+            left = mid + 1;
+        }
+        else {
+            right = mid;
+        }
     }
-    else {
-        return (Math.floor(a[Math.floor((n - 1) / 2)] + middle) / 2);
+    arr.splice(left, 0, target);
+};
+const binaryDeletion = (arr, target) => {
+    let left = 0;
+    let right = arr.length;
+    while (left < right) {
+        const mid = (left + right) >> 1;
+        if (target === arr[mid]) {
+            arr.splice(mid, 1);
+            break;
+        }
+        else if (target > arr[mid]) {
+            left = mid + 1;
+        }
+        else {
+            right = mid;
+        }
     }
 };
 const medianSlidingWindow = (nums, k) => {
-    if (!nums.length) {
-        return [];
+    const arr = [];
+    const output = [];
+    const isEven = k % 2 === 0;
+    const m = k >> 1;
+    for (let i = 0; i < nums.length; i++) {
+        binaryInsertion(arr, nums[i]);
+        if (arr.length > k) {
+            binaryDeletion(arr, nums[i - k]);
+        }
+        if (arr.length === k) {
+            output.push(isEven ? (arr[m - 1] + arr[m]) / 2 : arr[m]);
+        }
     }
-    // find the median of the first window
-    const firstSlided = nums.slice(0, k);
-    let medians = [findMedian(firstSlided)];
-    for (let i = k; i < nums.length; i++) {
-        const slidingWindowArray = nums.slice(i - k + 1, i + 1);
-        medians.push(findMedian(slidingWindowArray));
-    }
-    return medians;
+    return output;
 };
 // some test cases
 console.log(medianSlidingWindow([1, 3, -1, -3, 5, 3, 6, 7], 3)); // [1.00000,-1.00000,-1.00000,3.00000,5.00000,6.00000]

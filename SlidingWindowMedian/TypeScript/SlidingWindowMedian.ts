@@ -1,40 +1,60 @@
 // Solution for: https://leetcode.com/problems/sliding-window-median/
-const findMedian = (arr:number[]) => {
-    
-    // get copy of the original array
-    const a = arr.slice();
+const binaryInsertion = (arr, target) => {
 
-    // sort it
-    a.sort((a, b) => a - b);
+	let left = 0;
+	let right = arr.length;
 
-    const n = a.length;
-    const middle = a[Math.floor(n / 2)];
+	while (left < right) {
+		const mid = (left + right) >> 1;
 
-    // find the mean based on length of the array of numbers
-    if ((n & 1) !== 0) {
-        return middle;
-    } else {
-        return (Math.floor(a[Math.floor((n - 1) / 2)] + middle) / 2);
-    }
-};
+		if (target > arr[mid]) {
+			left = mid + 1;
+		} else {
+			right = mid;
+		}
+	}
+
+	arr.splice(left, 0, target);
+}
+
+const binaryDeletion = (arr, target) => {
+	let left = 0;
+	let right = arr.length;
+
+	while (left < right) {
+		const mid = (left + right) >> 1;
+
+		if (target === arr[mid]) {
+			arr.splice(mid, 1);
+			break;
+		} else if (target > arr[mid]) {
+			left = mid + 1;
+		} else {
+			right = mid;
+		}
+	}
+}
 
 const medianSlidingWindow = (nums: number[], k: number): number[] => {
 
-    if (!nums.length) {
-        return [];
-    }
+    const arr = [];
+	const output = [];
+	const isEven = k % 2 === 0;
+	const m = k >> 1;
 
-    // find the median of the first window
-    const firstSlided = nums.slice(0, k);
+	for (let i = 0; i < nums.length; i++) {
+		binaryInsertion(arr, nums[i]);
 
-    let medians = [findMedian(firstSlided)];
+		if (arr.length > k) {
+			binaryDeletion(arr, nums[i - k]);
+		}
 
-    for (let i = k; i < nums.length; i++) {
-        const slidingWindowArray = nums.slice(i - k + 1, i + 1);
-        medians.push(findMedian(slidingWindowArray));
-    }
+		if (arr.length === k) {
+			output.push(isEven ? (arr[m - 1] + arr[m]) / 2 : arr[m]);
+		}
+	}
 
-    return medians;
+	return output;
 
 };
 
