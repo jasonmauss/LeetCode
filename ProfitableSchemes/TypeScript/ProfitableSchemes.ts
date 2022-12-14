@@ -1,7 +1,19 @@
 // Solution for: https://leetcode.com/problems/profitable-schemes/
 const profitableSchemes = (n: number, minProfit: number, group: number[], profit: number[]): number => {
 
-    return 0;
+    let schemes = new Array(n + 1).fill(0).map(() => new Array(minProfit + 1).fill(0))
+
+    schemes.forEach(c => c[0] = 1);
+    
+    for (let i = 0; i < group.length; i++) {
+        for (let j = n; j >= group[i]; j--) {
+            for (let k = minProfit; k >= 0; k--) {
+                schemes[j][k] = (schemes[j][k] + schemes[j - group[i]][Math.max(0, k - profit[i])]) % (1e9 + 7);
+            }
+        }
+    }
+
+    return schemes[n][minProfit];
 
 };
 
