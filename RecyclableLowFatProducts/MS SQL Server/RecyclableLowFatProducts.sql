@@ -6,13 +6,13 @@ IF OBJECT_ID(N'dbo.Products', N'U') IS NULL BEGIN
 END
 
 TRUNCATE TABLE Products
-insert into Products (product_id, low_fats, recyclable) values (0, 'Y', 'N')
-insert into Products (product_id, low_fats, recyclable) values (1, 'Y', 'Y')
-insert into Products (product_id, low_fats, recyclable) values (2, 'N', 'Y')
-insert into Products (product_id, low_fats, recyclable) values (3, 'Y', 'Y')
-insert into Products (product_id, low_fats, recyclable) values (4, 'N', 'N')
+INSERT INTO Products (product_id, low_fats, recyclable) VALUES (0, 'Y', 'N')
+INSERT INTO Products (product_id, low_fats, recyclable) VALUES (1, 'Y', 'Y')
+INSERT INTO Products (product_id, low_fats, recyclable) VALUES (2, 'N', 'Y')
+INSERT INTO Products (product_id, low_fats, recyclable) VALUES (3, 'Y', 'Y')
+INSERT INTO Products (product_id, low_fats, recyclable) VALUES (4, 'N', 'N')
 
 -- The actual query / solution
 SELECT  p.product_id
   FROM  Products AS p
- WHERE  (p.low_fats = 'Y') AND (recyclable = 'Y')
+ WHERE  (p.low_fats = 'Y') AND (p.recyclable = 'Y')
