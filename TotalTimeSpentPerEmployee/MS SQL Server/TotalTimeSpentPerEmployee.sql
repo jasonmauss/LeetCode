@@ -1,0 +1,21 @@
+-- Solution for: https://leetcode.com/problems/find-total-time-spent-by-each-employee/ on mssql dbms platform
+
+-- Create the table and insert the data
+IF OBJECT_ID(N'dbo.Employees', N'U') IS NULL BEGIN
+	CREATE TABLE Employees (emp_id INT, event_day DATE, in_time INT, out_time INT)
+END
+
+TRUNCATE TABLE Employees
+INSERT INTO Employees (emp_id, event_day, in_time, out_time) VALUES ('1', '2020-11-28', '4', '32')
+INSERT INTO Employees (emp_id, event_day, in_time, out_time) VALUES ('1', '2020-11-28', '55', '200')
+INSERT INTO Employees (emp_id, event_day, in_time, out_time) VALUES ('1', '2020-12-3', '1', '42')
+INSERT INTO Employees (emp_id, event_day, in_time, out_time) VALUES ('2', '2020-11-28', '3', '33')
+INSERT INTO Employees (emp_id, event_day, in_time, out_time) VALUES ('2', '2020-12-9', '47', '74')
+
+-- The actual query / solution
+	SELECT  e.event_day AS [day],
+			e.emp_id,
+			SUM(e.out_time - e.in_time) AS total_time
+	  FROM	Employees AS e
+  GROUP BY  e.emp_id,
+			e.event_day
