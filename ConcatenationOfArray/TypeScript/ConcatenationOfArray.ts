@@ -1,7 +1,8 @@
 // Solution for: https://leetcode.com/problems/concatenation-of-array/
 const getConcatenation = (nums: number[]): number[] => {
 
-    return [0];
+    return nums.concat(nums);
+
 };
 
 
