@@ -1,7 +1,10 @@
 // Solution for: https://leetcode.com/problems/convert-the-temperature/
 const convertTemperature = (celsius: number): number[] => {
 
-    return [0];
+    let kelvin:number = celsius + 273.15;
+    let fahrenheit:number = (celsius * 1.80) + 32.00;
+
+    return [kelvin, fahrenheit];
 
 };
 
