@@ -19,3 +19,12 @@ INSERT INTO DailySales (date_id, make_name, lead_id, partner_id) VALUES ('2020-1
 INSERT INTO DailySales (date_id, make_name, lead_id, partner_id) VALUES ('2020-12-7', 'honda', '2', '1')
 
 -- The actual query / solution
+	SELECT	ds.date_id,
+			ds.make_name,
+			COUNT(DISTINCT ds.lead_id) AS unique_leads,
+			COUNT(DISTINCT ds.partner_id) AS unique_partners
+	  FROM	DailySales ds
+  GROUP BY	ds.date_id,
+			ds.make_name
+  ORDER BY	ds.make_name DESC,
+			ds.date_id DESC
