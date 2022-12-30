@@ -1,7 +1,7 @@
 // Solution for: https://leetcode.com/problems/defanging-an-ip-address/
 const defangIPaddr = (address: string): string => {
 
-    return '';
+    return address.split('.').join('[.]');
 
 };
 
