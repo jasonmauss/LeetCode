@@ -1,7 +1,13 @@
 // Solution for: https://leetcode.com/problems/shuffle-the-array/
 const shuffle = (nums: number[], n: number): number[] => {
 
-    return [0];
+    let answer:number[] = [];
+
+    for(let i = 0; i < n; i++) {
+        answer.push(...[nums[i], nums[i + n]]);
+    }
+
+    return answer;
 
 };
 
