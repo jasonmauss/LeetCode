@@ -1,6 +1,10 @@
 // Solution for: https://leetcode.com/problems/shuffle-the-array/
 const shuffle = (nums, n) => {
-    return [0];
+    let answer = [];
+    for (let i = 0; i < n; i++) {
+        answer.push(...[nums[i], nums[i + n]]);
+    }
+    return answer;
 };
 // some test cases
 console.log(shuffle([2, 5, 1, 3, 4, 7], 3)); // [2,3,5,4,1,7]
