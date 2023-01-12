@@ -1,7 +1,14 @@
 // Solution for: https://leetcode.com/problems/richest-customer-wealth/
 const maximumWealth = (accounts: number[][]): number => {
 
-    return 0;
+    let maxWealth:number = 0;
+
+    for(let account of accounts) {
+        const sum = account.reduce((runningTotal, nextValue) => runningTotal + nextValue, 0);
+        maxWealth = Math.max(maxWealth, sum);
+    }
+
+    return maxWealth;
 
 };
 
