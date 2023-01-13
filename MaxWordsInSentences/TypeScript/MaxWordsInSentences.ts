@@ -1,11 +1,15 @@
 // Solution for: https://leetcode.com/problems/maximum-number-of-words-found-in-sentences/
 const mostWordsFound = (sentences: string[]): number => {
 
-    return 0;
+    // if you like the cool (but less readable) one-liners, you could go with this
+    //return Math.max(...sentences.map(sentence => sentence.split(' ').length));
+
+    // This isn't necessarily much more readable, but it's a little bit faster
+    return sentences.reduce((currentMostWordsFound, nextSentence):number => {
+        return Math.max(currentMostWordsFound, nextSentence.split(' ').length)
+    }, 0)
 
 };
-
-
 
 
 
