@@ -32,5 +32,22 @@ INSERT INTO Transactions (transaction_id, visit_id, amount) values (9, 5, 200)
 INSERT INTO Transactions (transaction_id, visit_id, amount) values (12, 1, 910)
 INSERT INTO Transactions (transaction_id, visit_id, amount) values (13, 2, 970)
 
--- SQL Solution:
+-- SQL Solutions:
 
+	SELECT	v.customer_id,
+			COUNT(v.visit_id) AS count_no_trans
+      FROM	Visits AS v
+ LEFT JOIN	Transactions AS tx ON tx.visit_id = v.visit_id
+	 WHERE	tx.visit_id IS NULL
+  GROUP BY	v.customer_id
+  ORDER BY	COUNT(v.visit_id) DESC;
+
+	SELECT	v.customer_id,
+			COUNT(v.visit_id) AS count_no_trans
+	  FROM	Visits AS v
+	 WHERE	NOT EXISTS
+			(SELECT	1
+			   FROM	Transactions AS tx
+			  WHERE	v.visit_id = tx.visit_id)
+  GROUP BY	v.customer_id
+  ORDER BY	COUNT(v.visit_id) DESC;
