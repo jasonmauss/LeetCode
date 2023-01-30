@@ -1,8 +1,14 @@
 // Solution for: https://leetcode.com/problems/decode-xored-array/
 const decode = (encoded: number[], first: number): number[] => {
 
-    return [0];
+    let decodedArray = new Array(encoded.length + 1);
+    decodedArray[0] = first;
+    for(let encodedIndex = 0; encodedIndex < encoded.length; encodedIndex++) {
+        decodedArray[encodedIndex + 1] = decodedArray[encodedIndex] ^ encoded[encodedIndex];
+    }
 
+    return decodedArray;
+    
 };
 
 
