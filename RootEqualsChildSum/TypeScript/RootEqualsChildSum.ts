@@ -16,7 +16,7 @@ class TreeNode {
 
 const checkTree = (root: TreeNode | null): boolean => {
 
-    return false;
+    return root.val === root.left.val + root.right.val;
 
 };
 
@@ -37,4 +37,4 @@ let tn4:TreeNode = new TreeNode(3, null, null);
 let tn5:TreeNode = new TreeNode(1, null, null);
 let tn6:TreeNode = new TreeNode(5, tn4, tn5);
 
-console.log(checkTree(tn3)); // false
+console.log(checkTree(tn6)); // false
