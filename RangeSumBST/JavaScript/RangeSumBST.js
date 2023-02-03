@@ -12,10 +12,16 @@ class TreeNode {
         this.right = (right === undefined ? null : right);
     }
 }
-function rangeSumBST(root, low, high) {
-    return 0;
-}
-;
+const rangeSumBST = (root, low, high) => {
+    if (!root)
+        return 0;
+    let returnVal = 0;
+    if (root && (root.val >= low && root.val <= high)) {
+        returnVal += root.val;
+    }
+    returnVal += rangeSumBST(root.left, low, high) + rangeSumBST(root.right, low, high);
+    return returnVal;
+};
 // some test cases
 let tn1 = new TreeNode(3, null, null);
 let tn2 = new TreeNode(7, null, null);
