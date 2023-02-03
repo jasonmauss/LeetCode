@@ -15,9 +15,19 @@ class TreeNode {
     }
 }
 
-function rangeSumBST(root: TreeNode | null, low: number, high: number): number {
+const rangeSumBST = (root: TreeNode | null, low: number, high: number): number => {
 
-    return 0;
+    if (!root) return 0;
+
+    let returnVal:number = 0;
+
+    if(root && (root.val >= low && root.val <= high)) {
+        returnVal += root.val;
+    }
+
+    returnVal += rangeSumBST(root.left, low, high) + rangeSumBST(root.right, low, high);
+
+    return returnVal;
 
 };
 
