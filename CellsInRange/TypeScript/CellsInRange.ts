@@ -1,8 +1,22 @@
 // Solution for: https://leetcode.com/problems/cells-in-a-range-on-an-excel-sheet/
 const cellsInRange = (s: string): string[] => {
 
-    return [''];
+    const [startCell, endCell] = s.split(':');
 
+    let startCellRowNum = startCell.charCodeAt(0);
+    let startCellColumnNum = Number(startCell.substring(1));
+    let endCellRowNum = endCell.charCodeAt(0);
+    let endCellColumnNum = Number(endCell.substring(1));
+
+    let CellsInRangeArray = [];
+
+    for(let rowPosition = startCellRowNum; rowPosition <= endCellRowNum; rowPosition++) {
+        for(let cellPosition = startCellColumnNum; cellPosition <= endCellColumnNum; cellPosition++) {
+            CellsInRangeArray.push(String.fromCharCode(rowPosition) + cellPosition);
+        }
+    }
+
+    return CellsInRangeArray;
 };
 
 
