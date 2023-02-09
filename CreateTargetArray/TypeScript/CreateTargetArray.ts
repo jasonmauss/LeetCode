@@ -1,8 +1,13 @@
 // Solution for: https://leetcode.com/problems/create-target-array-in-the-given-order/
 const createTargetArray = (nums: number[], index: number[]): number[] => {
 
-    return [0];
+    let target = new Array().fill(nums.length);
 
+    for(let arrayPosition = 0; arrayPosition < nums.length; arrayPosition++) {
+        target.splice(index[arrayPosition], 0, nums[arrayPosition]);
+    }
+
+    return target;
 };
 
 
