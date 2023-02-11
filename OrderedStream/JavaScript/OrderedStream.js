@@ -1,9 +1,19 @@
 // Solution for: https://leetcode.com/problems/design-an-ordered-stream/
 class OrderedStream {
+    currentIndex;
+    orderedArray;
     constructor(n) {
+        this.currentIndex = 1;
+        this.orderedArray = new Array(n).fill(null);
     }
     insert(idKey, value) {
-        return [''];
+        const returnArray = [];
+        this.orderedArray[idKey] = value;
+        while (this.orderedArray[this.currentIndex] != null) {
+            returnArray.push(this.orderedArray[this.currentIndex]);
+            this.currentIndex++;
+        }
+        return returnArray;
     }
 }
 /**
