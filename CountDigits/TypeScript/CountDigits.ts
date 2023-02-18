@@ -1,8 +1,14 @@
 // Solution for: https://leetcode.com/problems/count-the-digits-that-divide-a-number/
 const countDigits = (num: number): number => {
 
-    return 0 ;
+    let digits = num.toString().split('');
+    let divisibleDigitCount = 0;
 
+    for(let digit of digits) {
+        if(num % Number(digit) === 0) divisibleDigitCount++;
+    }
+
+    return divisibleDigitCount;
 };
 
 
