@@ -5,7 +5,7 @@ const arithmeticTriplets = (nums: number[], diff: number): number => {
     let tripletCount = 0;
 
     for(let num of nums) {
-        if (numberSet.has(num - 2 * diff) &&numberSet.has(num - diff)) {
+        if (numberSet.has(num - 2 * diff) && numberSet.has(num - diff)) {
             tripletCount++;
         }
         numberSet.add(num);
