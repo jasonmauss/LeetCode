@@ -1,8 +1,15 @@
 // Solution for: https://leetcode.com/problems/find-center-of-star-graph/
 const findCenter = (edges: number[][]): number => {
 
-    return 0;
+    let firstVal = edges[0][0];
+    let secondVal = edges[0][1];
 
+    if(edges[1].find((num => num === firstVal))) {
+        return firstVal;
+    } else {
+        return secondVal;
+    }
+    
 };
 
 
