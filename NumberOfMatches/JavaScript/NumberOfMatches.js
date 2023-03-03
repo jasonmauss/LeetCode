@@ -1,6 +1,6 @@
 // Solution for: https://leetcode.com/problems/count-of-matches-in-tournament/
 const numberOfMatches = (n) => {
-    return 0;
+    return n - 1;
 };
 // some test cases
 console.log(numberOfMatches(7)); // 6
