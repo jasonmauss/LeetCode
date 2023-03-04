@@ -3,7 +3,7 @@
 USE leetcodedb;
 GO
 
-IF OBJECT_ID(N'dbo.Transactions', N'U') IS NULL BEGIN
+IF OBJECT_ID(N'dbo.Salary', N'U') IS NULL BEGIN
 	CREATE TABLE Salary (id int, name varchar(100), sex char(1), salary int);
 END
 GO
@@ -18,5 +18,6 @@ INSERT INTO Salary (id, name, sex, salary) VALUES (4, 'D', 'f', 500);
 
 -- SQL Solution:
 
-	
+ UPDATE	Salary 
+	SET sex = CASE WHEN sex = 'm' THEN 'f' ELSE 'm' END
 

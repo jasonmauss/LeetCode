@@ -11,4 +11,5 @@ INSERT INTO Salary (id, name, sex, salary) VALUES ('3', 'C', 'm', '5500');
 INSERT INTO Salary (id, name, sex, salary) VALUES ('4', 'D', 'f', '500');
 
 -- SQL Solution:
-	
+ UPDATE	Salary 
+	SET sex = CASE WHEN sex = 'm' THEN 'f' ELSE 'm' END
