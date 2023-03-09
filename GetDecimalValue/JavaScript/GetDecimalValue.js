@@ -8,7 +8,15 @@ class ListNode {
     }
 }
 function getDecimalValue(head) {
-    return 0;
+    if (head.val === 0 && head.next === null)
+        return 0;
+    let binaryString = '';
+    let node = head;
+    while (node !== null) {
+        binaryString += node.val.toString();
+        node = node.next;
+    }
+    return parseInt(binaryString, 2);
 }
 ;
 // some test cases
