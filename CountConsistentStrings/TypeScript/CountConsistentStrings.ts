@@ -1,7 +1,28 @@
 // Solution for: https://leetcode.com/problems/count-the-number-of-consistent-strings/description/
 const countConsistentStrings = (allowed: string, words: string[]): number => {
 
-    return 0;
+    let consistentStringCount = 0;
+    const allowedChars = new Set(allowed.split(''));
+
+    for(let word of words) {
+
+        let isStringConsistent = false;
+
+        for(let char of word.split('')) {
+            
+            if(allowedChars.has(char)) {
+                isStringConsistent = true;
+                continue;
+            } else {
+                isStringConsistent = false;
+                break;
+            }
+        }
+
+        if(isStringConsistent) consistentStringCount++;
+    }
+
+    return consistentStringCount;
 
 };
 
