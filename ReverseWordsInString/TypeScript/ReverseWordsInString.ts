@@ -1,7 +1,12 @@
 // Solution for: https://leetcode.com/problems/reverse-words-in-a-string-iii/
 const reverseWords = (s: string): string => {
 
-    return '';
+    const wordArray = s.split(' ');
+    wordArray.forEach((word, index) => {
+        wordArray[index] = word.split('').reverse().join('');
+    });
+
+    return wordArray.join(' ');
 
 };
 
