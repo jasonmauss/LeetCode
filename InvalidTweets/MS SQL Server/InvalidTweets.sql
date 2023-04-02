@@ -15,5 +15,7 @@ INSERT INTO Tweets (tweet_id, content) VALUES (1, 'Vote for Biden')
 INSERT INTO Tweets (tweet_id, content) VALUES (2, 'Let us make America great again!')
 
 -- SQL Solution:
-
+	SELECT	t.tweet_id
+	  FROM	Tweets AS t
+	 WHERE	DATALENGTH(t.content) > 15
 
