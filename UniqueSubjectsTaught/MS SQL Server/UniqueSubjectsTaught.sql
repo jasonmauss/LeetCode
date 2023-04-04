@@ -20,5 +20,8 @@ INSERT INTO Teacher (teacher_id, subject_id, dept_id) VALUES (2, 3, 1)
 INSERT INTO Teacher (teacher_id, subject_id, dept_id) VALUES (2, 4, 1)
 
 -- SQL Solution:
-
+	SELECT	teacher_id,
+			COUNT(DISTINCT subject_id) AS cnt
+	  FROM	Teacher AS t
+  GROUP BY	teacher_id
 
