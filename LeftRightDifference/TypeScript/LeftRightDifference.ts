@@ -3,9 +3,18 @@ const leftRigthDifference = (nums: number[]): number[] => {
 
     if(nums.length === 1) return [0];
 
-    const leftArray = [];
-    const rightArray = [];
-    const arrayDifferences = [];
+    let sumRight = nums.reduce((a,b) => a + b);
+    let sumLeft = 0;
+    const num = nums.slice(0, nums.length - 1);
+    num.unshift(0);
+    
+    for(let i = 0; i < nums.length; i++){
+        sumRight -= nums[i];
+        sumLeft += num[i];
+        num[i] = Math.abs(sumLeft - sumRight);
+    }
+    
+    return num;
 
 };
 
