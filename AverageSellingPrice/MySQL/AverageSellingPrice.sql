@@ -17,4 +17,11 @@ INSERT INTO UnitsSold (product_id, purchase_date, units) VALUES ('2', '2019-02-1
 INSERT INTO UnitsSold (product_id, purchase_date, units) VALUES ('2', '2019-03-22', '30');
 
 -- SQL Solution:
-	
+	SELECT	p.product_id,
+			CAST(SUM(CAST(u.units AS DECIMAL(10,2)) *
+			CAST(p.price AS DECIMAL(10,2))) / SUM(CAST(u.units AS DECIMAL(10,2))) AS DECIMAL(10,2)) AS average_price
+	  FROM	Prices AS p
+	  JOIN	UnitsSold AS u 
+			ON  u.product_id = p.product_id
+			AND u.purchase_date BETWEEN p.start_date AND p.end_date
+  GROUP BY	p.product_id
