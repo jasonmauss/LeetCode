@@ -2,9 +2,10 @@
 type F = (x: number) => number;
 
 function compose(functions: F[]): F {
-	return function(x) {
-        return x;
-    }
+	const returnFunc: F = (i: number) => i;
+    return functions.reduceRight((composition, func) => (
+        (i:number) => func(composition(i))
+    ), returnFunc);
 };
 
 /**
@@ -18,4 +19,8 @@ function compose(functions: F[]): F {
 
 
 // some test cases
-console.log(); // 
+const fn = compose([x => x + 1, x => 2 * x]);
+console.log(fn(4)); // 9
+
+const fn2 = compose([x => x * 3, x => 2 + x, x => x + 14]);
+console.log(fn2(3)); // 57
