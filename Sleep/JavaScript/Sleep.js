@@ -1,5 +1,11 @@
 // Solution for: https://leetcode.com/problems/sleep/
 async function sleep(millis) {
+    let myPromise = new Promise(function (resolve, reject) {
+        setTimeout(() => {
+            resolve();
+        }, millis);
+    });
+    return myPromise;
 }
 /**
  * let t = Date.now()
