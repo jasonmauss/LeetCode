@@ -3,7 +3,6 @@ const sumOfMultiples = (n: number): number => {
 
     if(n < 3) return 0;
 
-    let rangeNumbers = [3, 5, 7];
     let multiplesSum = 0;
 
     for(let i = 3; i <= n; i++) {
