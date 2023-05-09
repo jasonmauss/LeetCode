@@ -1,7 +1,20 @@
 // Solution for: https://leetcode.com/problems/count-equal-and-divisible-pairs-in-an-array/
 const countPairs = (nums: number[], k: number): number => {
 
-    return 0;
+    let pairCount = 0;
+
+    for (let i = 0; i < nums.length; i++)
+
+        for (let j = i; j < nums.length; j++) {
+
+        if (j === i)
+            continue;
+
+        if (nums[i] === nums[j] && (i * j) % k === 0)
+        pairCount++;
+    }
+
+    return pairCount;
 
 };
 
