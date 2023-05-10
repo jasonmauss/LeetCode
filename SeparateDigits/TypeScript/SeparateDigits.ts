@@ -1,7 +1,16 @@
 // Solution for: https://leetcode.com/problems/separate-the-digits-in-an-array/
 const separateDigits = (nums: number[]): number[] => {
 
-    return [0];
+    const outputNums = [];
+
+    for(let num of nums) {
+        let tempStringArray = num.toString().split('');
+        for(let chars of tempStringArray) {
+            outputNums.push(parseInt(chars));
+        }
+    }
+
+    return outputNums;
 
 };
 
