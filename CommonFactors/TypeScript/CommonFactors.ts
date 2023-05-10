@@ -1,7 +1,15 @@
 // Solution for: https://leetcode.com/problems/number-of-common-factors/
 const commonFactors = (a: number, b: number): number => {
 
-    return 0;
+    const factorSet = new Set();
+    factorSet.add(1);
+
+    for(let factor = 2; factor <= Math.min(a, b); factor++) {
+        if(a % factor === 0 && b % factor === 0) factorSet.add(factor);
+    }
+
+
+    return factorSet.size;
 
 };
 
