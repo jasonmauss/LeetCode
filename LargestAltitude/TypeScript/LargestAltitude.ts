@@ -1,7 +1,15 @@
 // Solution for: https://leetcode.com/problems/find-the-highest-altitude/
 const largestAltitude = (gain: number[]): number => {
 
-    return 0;
+    let runningTotal = 0;
+    let highestNum = 0;
+
+    for(let g of gain) {
+        runningTotal += g;
+        highestNum = Math.max(runningTotal, highestNum);
+    }
+
+    return highestNum;
 
 };
 
