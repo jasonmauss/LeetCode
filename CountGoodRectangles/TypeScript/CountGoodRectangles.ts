@@ -1,7 +1,20 @@
 // Solution for: https://leetcode.com/problems/number-of-rectangles-that-can-form-the-largest-square/
 const countGoodRectangles = (rectangles: number[][]): number => {
 
-    return 0;
+    const largestSquares = [];
+    let rectangleCount = 0;
+
+    for(let [length, width] of rectangles) {
+        largestSquares.push(Math.min(length, width));
+    }
+
+    let maxRect = Math.max(...largestSquares);
+
+    const countOccurrences = (arr, val) => arr.reduce((a, v) => (v === val ? a + 1 : a), 0);
+
+    rectangleCount = countOccurrences(largestSquares, maxRect);
+
+    return rectangleCount;
 
 };
 
