@@ -1,7 +1,21 @@
 // Solution for: https://leetcode.com/problems/chunk-array/
 const chunk = (arr: any[], size: number): any[][] => {
 
-    return [];
+    if(arr.length === 0) return [];
+
+    const chunks = [];
+
+    for(let i = 0; i < arr.length; i += size) {
+        let tempChunk = [];
+        for(let j = i; j < i + size; j++) {
+            if(j < arr.length) {
+                tempChunk.push(arr[j]);
+            }
+        }
+        chunks.push(tempChunk);
+    }
+
+    return chunks;
 
 };
 
