@@ -1,7 +1,14 @@
 // Solution for: https://leetcode.com/problems/number-of-senior-citizens/
 const countSeniors = (details: string[]): number => {
 
-    return 0;
+    let seniorCount = 0;
+
+    for(let detail of details) {
+        if(parseInt(detail[11] + detail[12]) > 60) seniorCount++;
+    }
+
+
+    return seniorCount;
 
 };
 
