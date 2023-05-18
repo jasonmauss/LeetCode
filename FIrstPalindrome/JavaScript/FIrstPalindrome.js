@@ -1,0 +1,8 @@
+// Solution for: https://leetcode.com/problems/find-first-palindromic-string-in-the-array/
+const firstPalindrome = (words) => {
+    return '';
+};
+// some test cases
+console.log(firstPalindrome(["abc", "car", "ada", "racecar", "cool"])); // "ada"
+console.log(firstPalindrome(["notapalindrome", "racecar"])); // "racecar"
+console.log(firstPalindrome(["def", "ghi"])); // ""
