@@ -11,7 +11,25 @@ class TreeNode {
     }
 }
 const increasingBST = (root) => {
-    return null;
+    const nodeValues = [];
+    const getNodeValues = (rootNode) => {
+        let returnValues = [];
+        if (rootNode) {
+            returnValues.push(rootNode.val);
+            returnValues.push(...getNodeValues(rootNode.left));
+            returnValues.push(...getNodeValues(rootNode.right));
+        }
+        return returnValues;
+    };
+    nodeValues.push(...getNodeValues(root));
+    nodeValues.sort((a, b) => a - b);
+    let childNode = new TreeNode(nodeValues[nodeValues.length - 1]);
+    let parentNode;
+    for (let i = nodeValues.length - 2; i >= 0; i--) {
+        parentNode = new TreeNode(nodeValues[i], null, childNode);
+        childNode = parentNode;
+    }
+    return parentNode;
 };
 // some test cases
 let rootNode = new TreeNode(5, new TreeNode(3, new TreeNode(2, new TreeNode(1, null, null), null), new TreeNode(4, null, null)), new TreeNode(6, null, new TreeNode(8, new TreeNode(7, null, null), new TreeNode(9, null, null))));
