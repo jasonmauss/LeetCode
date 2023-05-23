@@ -14,15 +14,38 @@ class TreeNode {
 
 const increasingBST = (root: TreeNode | null): TreeNode | null => {
 
-    return null;
+    const nodeValues:number[] = [];
 
+    const getNodeValues = (rootNode:TreeNode): number[] => {
+        
+        let returnValues:number[] = [];
+
+        if(rootNode) {
+            returnValues.push(rootNode.val);
+            returnValues.push(...getNodeValues(rootNode.left));
+            returnValues.push(...getNodeValues(rootNode.right));
+        }
+
+        return returnValues;
+    }
+
+    nodeValues.push(...getNodeValues(root));
+
+    nodeValues.sort((a, b) => a - b);
+
+    let childNode:TreeNode = new TreeNode(nodeValues[nodeValues.length - 1]);
+    let parentNode:TreeNode;
+
+    if(nodeValues.length > 1) {
+        for(let i = nodeValues.length - 2; i >= 0; i--) {
+            parentNode = new TreeNode(nodeValues[i], null, childNode);
+            childNode = parentNode;
+        }
+    }
+
+    return parentNode;
+    
 };
-
-
-
-
-
-
 
 
 
