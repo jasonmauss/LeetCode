@@ -13,29 +13,23 @@ class LeetNode {
 
 function postorder(root: LeetNode | null): number[] {
 
-    return [0];
+    if(!root) return [];
+    return [].concat(...root.children.map(postorder), root.val);
 
 };
-
-
-
-
-
-
-
-
 
 
 // some test cases
 
 // Test 1
 let Test1RootNode1:LeetNode = new LeetNode(1)
-let Test1LeafNode1:LeetNode = new LeetNode(5);
-let Test1LeafNode2:LeetNode = new LeetNode(6);
-let Test1ChildNode1:LeetNode = new LeetNode(3);
+let Test1LeafNode5:LeetNode = new LeetNode(5);
+let Test1LeafNode6:LeetNode = new LeetNode(6);
+let Test1ChildNode3:LeetNode = new LeetNode(3);
 let Test1ChildNode2:LeetNode = new LeetNode(2);
-let Test1ChildNode3:LeetNode = new LeetNode(4);
-Test1ChildNode1.children = [Test1LeafNode1, Test1LeafNode2];
+let Test1ChildNode4:LeetNode = new LeetNode(4);
+Test1ChildNode3.children = [Test1LeafNode5, Test1LeafNode6];
+Test1RootNode1.children = [Test1ChildNode3, Test1ChildNode2, Test1ChildNode4];
 
 console.log(postorder(Test1RootNode1)); // [5,6,3,2,4,1]
 
