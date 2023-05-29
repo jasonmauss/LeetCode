@@ -11,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\ArrayPairSum.js",
+            "program": "${workspaceFolder}\\SameAfterReversals.js",
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ]
