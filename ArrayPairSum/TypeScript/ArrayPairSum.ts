@@ -1,7 +1,15 @@
 // Solution for: https://leetcode.com/problems/array-partition/
 const arrayPairSum = (nums: number[]): number => {
 
-    return 0;
+    const sortedNums = nums.sort((a, b) => a - b);
+    
+    let res = 0;
+    
+    for (let i = 0; i < sortedNums.length; i += 2) {
+        res += sortedNums[i];
+    }
+
+    return res;
 
 };
 

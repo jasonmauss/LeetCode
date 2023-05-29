@@ -1,6 +1,11 @@
 // Solution for: https://leetcode.com/problems/array-partition/
-const arrayPairSum = (nums) => {
-    return 0;
+var arrayPairSum = function (nums) {
+    var sortedNums = nums.sort(function (a, b) { return a - b; });
+    var res = 0;
+    for (var i = 0; i < sortedNums.length; i += 2) {
+        res += sortedNums[i];
+    }
+    return res;
 };
 // some test cases
 console.log(arrayPairSum([1, 4, 3, 2])); // 4
