@@ -1,7 +1,9 @@
 // Solution for: https://leetcode.com/problems/a-number-after-a-double-reversal/
 const isSameAfterReversals = (num: number): boolean => {
 
-    return false;
+    let reverseNum = Number(num.toString().split('').reverse().join(''));
+    let doubleReverseNum = Number(reverseNum.toString().split('').reverse().join(''));
+    return num === doubleReverseNum;
 
 };
 
