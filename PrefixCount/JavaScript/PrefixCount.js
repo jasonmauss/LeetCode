@@ -1,6 +1,12 @@
 // Solution for: https://leetcode.com/problems/counting-words-with-a-given-prefix/
 const prefixCount = (words, pref) => {
-    return 0;
+    let prefixedWords = 0;
+    for (let word of words) {
+        if (word.startsWith(pref)) {
+            prefixedWords++;
+        }
+    }
+    return prefixedWords;
 };
 // some test cases
 console.log(prefixCount(["pay", "attention", "practice", "attend"], "at")); // 2
