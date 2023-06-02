@@ -1,7 +1,18 @@
 // Solution for: https://leetcode.com/problems/find-greatest-common-divisor-of-array/
 const findGCD = (nums: number[]): number => {
 
-    return 0;
+    let denominator = 0;
+
+    let minVal = Math.min(...nums);
+    let maxVal = Math.max(...nums);
+
+    for(let i = 1; i <= minVal; i++) {
+        if(minVal % i === 0 && maxVal % i === 0) {
+            denominator = Math.max(denominator, i);
+        }
+    }
+
+    return denominator;
 
 };
 
