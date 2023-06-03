@@ -1,7 +1,14 @@
 // Solution for: https://leetcode.com/problems/find-numbers-with-even-number-of-digits/
 const findNumbers = (nums: number[]): number => {
 
-    return 0;
+    let evenDigitNumbers = 0;
+
+    for(let num of nums) {
+        if(num.toString().length % 2 === 0) 
+            evenDigitNumbers++;
+    }
+
+    return evenDigitNumbers;
 
 };
 
