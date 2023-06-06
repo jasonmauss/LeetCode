@@ -4,7 +4,16 @@
  */
  const reverseString = (s: string[]): void => {
 
-    return;
+    let low = 0;
+    let high = s.length - 1;
+
+    while(low < high) {
+        const tempVal = s[low];
+        s[low] = s[high];
+        s[high] = tempVal;
+        low++;
+        high--;
+    }
 
  };
 
@@ -14,5 +23,9 @@
 
 
 // some test cases
-console.log(reverseString(["h","e","l","l","o"])); // ["o","l","l","e","h"]
-console.log(reverseString(["H","a","n","n","a","h"])); // ["h","a","n","n","a","H"]
+const string1 = ["h","e","l","l","o"];
+reverseString(string1);
+console.log(string1); // ["o","l","l","e","h"]
+const string2 = ["H","a","n","n","a","h"];
+reverseString(string2);
+console.log(string2); // ["h","a","n","n","a","H"]
