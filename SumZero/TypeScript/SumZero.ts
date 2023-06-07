@@ -1,7 +1,25 @@
 // Solution for: https://leetcode.com/problems/find-n-unique-integers-sum-up-to-zero/
 const sumZero = (n: number): number[] => {
 
-    return [0];
+    const uniqueNumbers:number[] = [];
+
+    if(n === 1) return [0];
+
+    for(let i = 1; uniqueNumbers.length < n; i++) {
+        
+        uniqueNumbers.push(i);
+        if(uniqueNumbers.length === n) {
+            uniqueNumbers[uniqueNumbers.length - 2] = 
+                (uniqueNumbers[uniqueNumbers.length - 1] + 
+                 uniqueNumbers[uniqueNumbers.length - 3]) * -1;
+        } else {
+            uniqueNumbers.push(i * -1);
+        }
+        
+
+    }
+
+    return uniqueNumbers.sort((a, b) => a - b);
 
 };
 
