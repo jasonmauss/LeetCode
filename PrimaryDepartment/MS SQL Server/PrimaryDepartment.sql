@@ -21,7 +21,23 @@ INSERT INTO Employee (employee_id, department_id, primary_flag) VALUES (4, 4,'N'
 
 
 -- SQL Solution:
+	SELECT	e.employee_id,
+			e.department_id
+	  FROM	Employee AS e
+	 WHERE	e.primary_flag = 'Y'
 
-	 
+
+UNION
+
+	SELECT	ee.employee_id,
+			department_id
+	FROM	Employee ee
+	INNER JOIN (
+				SELECT	e.employee_id,
+						COUNT(e.department_id) AS departments
+				  FROM	Employee AS e
+			  GROUP BY	e.employee_id
+				HAVING	COUNT(e.department_id) < 2
+				) AS OneDept ON OneDept.employee_id = ee.employee_id
 
 	
