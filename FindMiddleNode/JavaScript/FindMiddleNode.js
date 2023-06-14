@@ -11,7 +11,15 @@ class ListNode {
     }
 }
 const middleNode = (head) => {
-    return null;
+    if (!head.next)
+        return head;
+    let oneNode = head;
+    let twoNode = head.next;
+    while (twoNode) {
+        oneNode = oneNode.next;
+        twoNode = twoNode.next?.next;
+    }
+    return oneNode;
 };
 // some test cases
 let rootNode = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5, null)))));

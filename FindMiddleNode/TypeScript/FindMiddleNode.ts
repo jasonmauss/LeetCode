@@ -15,7 +15,17 @@ class ListNode {
 
 const middleNode = (head: ListNode | null): ListNode | null => {
 
-    return null;
+    if(!head.next) return head;
+
+    let oneNode:ListNode = head;
+    let twoNode:ListNode = head.next;
+
+    while(twoNode) {
+        oneNode = oneNode.next;
+        twoNode = twoNode.next?.next;
+    }
+
+    return oneNode;
 
 };
 
