@@ -4,4 +4,4 @@ const equalFrequency = (word) => {
 };
 // some test cases
 console.log(equalFrequency("abcc")); // true
-console.log(equalFrequency("abcc")); // false
+console.log(equalFrequency("aazz")); // false
