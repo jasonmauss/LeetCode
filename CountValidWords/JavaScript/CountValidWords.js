@@ -1,6 +1,22 @@
 // Solution for: https://leetcode.com/problems/number-of-valid-words-in-a-sentence/
+const isValidToken = (token) => {
+    if (/\d/.test(token))
+        return false;
+    if ((token.match(/-/g) || []).length > 1)
+        return false;
+    if (token.match(/,|.|!/g).length > 1)
+        return false;
+};
 const countValidWords = (sentence) => {
-    return 0;
+    // keep track of the number of "valid word" tokens found
+    let validTokens = 0;
+    // split the string by number of whitespace chars
+    const tokens = sentence.split(/\s+/);
+    for (const token of tokens) {
+        if (isValidToken(token))
+            validTokens++;
+    }
+    return validTokens;
 };
 // some test cases
 console.log(countValidWords("cat and  dog")); // 3
