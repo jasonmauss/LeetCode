@@ -1,7 +1,8 @@
 // Solution for: https://leetcode.com/problems/number-of-segments-in-a-string/
 const countSegments = (s: string): number => {
 
-    return 0;
+    return s.split(/\s+/).filter(x => x.trim().length > 1).length;
+
 
 };
 
