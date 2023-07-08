@@ -1,6 +1,7 @@
 // Solution for: https://leetcode.com/problems/reverse-words-in-a-string/
 const reverseWords = (s) => {
-    return '';
+    const wordArray = s.trim().split(/\s+/);
+    return wordArray.reverse().join(' ');
 };
 // some test cases
 console.log(reverseWords('the sky is blue')); // 'blue is sky the'
