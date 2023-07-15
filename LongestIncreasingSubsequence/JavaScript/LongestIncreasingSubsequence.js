@@ -3,13 +3,13 @@ const lengthOfLIS = (nums) => {
     let numbersLength = nums.length;
     let sequenceLengths = new Array(numbersLength).fill(1);
     for (let i = 1; i < numbersLength; i++) {
-        let ans = 1;
+        let tempLength = 1;
         for (let j = 0; j < i; j++) {
             if (nums[j] < nums[i] && sequenceLengths[i] < sequenceLengths[j] + 1) {
-                ans = Math.max(ans, 1 + sequenceLengths[j]);
+                tempLength = Math.max(tempLength, 1 + sequenceLengths[j]);
             }
         }
-        sequenceLengths[i] = ans;
+        sequenceLengths[i] = tempLength;
     }
     return Math.max(...sequenceLengths);
 };
