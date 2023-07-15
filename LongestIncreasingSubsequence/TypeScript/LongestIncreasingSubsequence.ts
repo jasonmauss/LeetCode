@@ -1,7 +1,20 @@
 // Solution for: https://leetcode.com/problems/longest-increasing-subsequence/
 const lengthOfLIS = (nums: number[]): number => {
 
-    return 0;
+    let numbersLength:number = nums.length;
+    let sequenceLengths:number[] = new Array(numbersLength).fill(1);
+
+    for (let i = 1; i < numbersLength; i++) {
+        let ans:number = 1;
+        for (let j = 0; j < i; j++) {
+            if (nums[j] < nums[i] && sequenceLengths[i] < sequenceLengths[j] + 1) {
+                ans = Math.max(ans, 1 + sequenceLengths[j]);
+            }
+        }
+        sequenceLengths[i] = ans;
+    }
+
+    return Math.max(...sequenceLengths);
 
 };
 
