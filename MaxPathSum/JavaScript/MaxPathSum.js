@@ -13,7 +13,17 @@ class TreeNode {
     }
 }
 const maxPathSum = (root) => {
-    return 0;
+    let maxSum = root.val; // initialize it to the first possible value
+    const getMaxSum = (node) => {
+        const maxLeftChildNodeSum = node.left ? Math.max(getMaxSum(node.left), 0) : 0;
+        const maxRightChildNodeSum = node.right ? Math.max(getMaxSum(node.right), 0) : 0;
+        const currentSum = maxLeftChildNodeSum + maxRightChildNodeSum + node.val;
+        if (maxSum < currentSum)
+            maxSum = currentSum;
+        return node.val + Math.max(maxLeftChildNodeSum, maxRightChildNodeSum);
+    };
+    getMaxSum(root);
+    return maxSum;
 };
 // some test cases
 let rootNode = new TreeNode(1, new TreeNode(2, null, null), new TreeNode(3, null, null));
