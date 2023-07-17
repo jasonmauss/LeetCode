@@ -1,7 +1,17 @@
 // Solution for: https://leetcode.com/problems/fibonacci-number/
-function fib(n: number): number {
+const fib = (n: number): number => {
 
-    return 0;
+    if(n < 2) return n;
+
+    let fibNumber1 = 0, fibNumber2 = 1, tempFibNumber = 0;
+
+    for(let i = 2; i <= n; i++) {
+        tempFibNumber = fibNumber1;
+        fibNumber1 = fibNumber2;
+        fibNumber2 = tempFibNumber + fibNumber1;
+    }
+
+    return fibNumber2;
 
 };
 
