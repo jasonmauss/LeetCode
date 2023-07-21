@@ -1,7 +1,7 @@
 // Solution for: https://leetcode.com/problems/kth-largest-element-in-an-array/
 const findKthLargest = (nums: number[], k: number): number => {
 
-    return 0;
+    return nums.sort((a, b) => b - a)[k -1];
 
 };
 
