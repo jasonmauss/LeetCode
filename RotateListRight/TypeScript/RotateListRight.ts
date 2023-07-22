@@ -13,9 +13,24 @@ class ListNode {
 }
 
 
-function rotateRight(head: ListNode | null, k: number): ListNode | null {
+const rotateRight = (head: ListNode | null, k: number): ListNode | null => {
 
-    return null;
+    if(!head) return head;
+
+    const nodeValues = [];
+
+    while(head) {
+        nodeValues.push(head.val);
+        head = head.next;
+    }
+
+    k = k % nodeValues.length;
+    while(k > 0) {
+        nodeValues.unshift(nodeValues.pop());
+        k--;
+    }
+
+    return nodeValues.reduceRight((acc, cur) => new ListNode(cur, acc), null);
 
 };
 
