@@ -1,6 +1,15 @@
 // Solution for: https://leetcode.com/problems/maximum-beauty-of-an-array-after-applying-operation
 function maximumBeauty(nums, k) {
-    return 0;
+    nums.sort((a, b) => a - b);
+    let begin = 0;
+    let result = 0;
+    for (let i = 0; i < nums.length; i++) {
+        while (nums[i] - nums[begin] > 2 * k) {
+            begin++;
+        }
+        result = Math.max(result, i - begin + 1);
+    }
+    return result;
 }
 ;
 // some test cases
