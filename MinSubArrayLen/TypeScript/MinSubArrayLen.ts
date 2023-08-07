@@ -1,7 +1,21 @@
 // Solution for: https://leetcode.com/problems/minimum-size-subarray-sum/
 const minSubArrayLen = (target: number, nums: number[]): number => {
 
-    return 0;
+    let minimumSubArrayLength = Infinity;
+    let slidingWindowSum = 0;
+    
+    for(let slidingWindowEnd = 0, slidingWindowStart = 0; slidingWindowEnd < nums.length; slidingWindowEnd++) {
+        
+        slidingWindowSum += nums[slidingWindowEnd];
+
+        while(slidingWindowSum >= target) {
+            minimumSubArrayLength = Math.min(minimumSubArrayLength, slidingWindowEnd - slidingWindowStart + 1);
+            slidingWindowSum -= nums[slidingWindowStart];
+            slidingWindowStart++;
+        }
+    }
+
+    return minimumSubArrayLength === Infinity ? 0 : minimumSubArrayLength;
 
 };
 
