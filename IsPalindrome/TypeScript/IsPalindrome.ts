@@ -1,7 +1,8 @@
 // Solution for: https://leetcode.com/problems/valid-palindrome/
 const isPalindrome = (s: string): boolean => {
 
-    return false;
+    return s.replace(/[^0-9a-z]/gi, '').toLowerCase().split('').reverse().join('') 
+    === s.replace(/[^0-9a-z]/gi, '').toLowerCase();
 
 };
 
