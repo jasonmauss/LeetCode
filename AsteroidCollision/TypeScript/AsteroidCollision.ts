@@ -1,7 +1,35 @@
 // Solution for: https://leetcode.com/problems/asteroid-collision/
 const asteroidCollision = (asteroids: number[]): number[] => {
 
-    return [0];
+    let collisionResults = [asteroids[0]];
+    let i = 1;
+
+    while(i < asteroids.length ){
+
+        if(Math.sign(collisionResults[collisionResults.length - 1]) === Math.sign(asteroids[i]) 
+        ||(Math.sign(collisionResults[collisionResults.length - 1]) !== 1 && Math.sign(asteroids[i]))) {
+
+            collisionResults.push(asteroids[i]);
+            i++;
+            continue;
+
+        }        
+
+        if(Math.abs(collisionResults[collisionResults.length - 1]) === Math.abs(asteroids[i])){
+            i++;
+            collisionResults.pop()
+            continue;
+        }
+
+        if(Math.abs(collisionResults[collisionResults.length - 1])<Math.abs(asteroids[i])){
+            collisionResults.pop()
+            continue;
+        }
+
+        i++;
+    }
+    
+    return collisionResults;
 
 };
 
