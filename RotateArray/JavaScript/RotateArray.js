@@ -3,6 +3,10 @@
  Do not return anything, modify nums in-place instead.
  */
 const rotate = (nums, k) => {
+    while (k > 0) {
+        nums.unshift(nums.pop());
+        k--;
+    }
 };
 // some test cases
 const nums = [1, 2, 3, 4, 5, 6, 7];
