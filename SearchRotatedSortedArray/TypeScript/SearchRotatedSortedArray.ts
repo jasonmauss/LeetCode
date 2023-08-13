@@ -1,7 +1,7 @@
 // Solution for: https://leetcode.com/problems/search-in-rotated-sorted-array-ii/
 const search = (nums: number[], target: number): boolean => {
 
-    return false;
+    return nums.filter((x) => x === target).length > 0;
 
 };
 
