@@ -1,7 +1,15 @@
 // Solution for: https://leetcode.com/problems/maximum-subarray/
 const maxSubArray = (nums: number[]): number => {
 
-    return 0;
+    let currentWindow = 0;
+    let bigWindow = -Infinity;
+
+    for (const num of nums) {
+        currentWindow = Math.max(num, currentWindow + num);
+        if (currentWindow > bigWindow) bigWindow = currentWindow;
+    }
+
+    return bigWindow;
 
 };
 

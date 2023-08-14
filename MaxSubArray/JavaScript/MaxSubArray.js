@@ -1,6 +1,13 @@
 // Solution for: https://leetcode.com/problems/maximum-subarray/
 const maxSubArray = (nums) => {
-    return 0;
+    let currentWindow = 0;
+    let bigWindow = -Infinity;
+    for (const num of nums) {
+        currentWindow = Math.max(num, currentWindow + num);
+        if (currentWindow > bigWindow)
+            bigWindow = currentWindow;
+    }
+    return bigWindow;
 };
 // some test cases
 console.log(maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4])); // 6
