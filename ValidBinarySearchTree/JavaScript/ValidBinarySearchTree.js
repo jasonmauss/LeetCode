@@ -18,3 +18,5 @@ const isValidBST = (root) => {
 // some test cases
 const rootNode = new TreeNode(2, new TreeNode(1, null), new TreeNode(3, null));
 console.log(isValidBST(rootNode)); // true
+const rootNode2 = new TreeNode(5, new TreeNode(1, null), new TreeNode(4, new TreeNode(3, null), new TreeNode(6, null)));
+console.log(isValidBST(rootNode2)); // false

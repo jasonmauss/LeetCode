@@ -28,3 +28,13 @@ const rootNode:TreeNode = new TreeNode(2,
 )
 
 console.log(isValidBST(rootNode)); // true
+
+const rootNode2:TreeNode = new TreeNode(5,
+    new TreeNode(1, null),
+    new TreeNode(4, 
+        new TreeNode(3, null),
+        new TreeNode(6, null)
+    )
+)
+
+console.log(isValidBST(rootNode2)); // false
