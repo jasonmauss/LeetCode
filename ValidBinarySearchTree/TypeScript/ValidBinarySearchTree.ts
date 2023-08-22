@@ -13,9 +13,17 @@ class TreeNode {
     }
 }
 
-const isValidBST = (root: TreeNode | null): boolean => {
+const isValidBST = (root: TreeNode | null, minPossibleValue:number = -Infinity, maxPossibleValue:number = Infinity): boolean => {
 
-    return false;
+    // if the root is null, then is valid BST
+    if(!root) return true;
+
+    // check if current node value is between the min/max values
+    return !(root.val <= minPossibleValue || root.val >= maxPossibleValue) &&
+            // left sub-node has a max value of current node value
+            isValidBST(root.left, minPossibleValue, root.val) && 
+            // right sub-node has a min value of current node value
+            isValidBST(root.right, root.val, maxPossibleValue);
 
 };
 
