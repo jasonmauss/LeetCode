@@ -12,9 +12,16 @@ class ListNode {
     }
 }
 
-function reverseList(head: ListNode | null): ListNode | null {
+const reverseList = (head: ListNode | null): ListNode | null => {
 
-    return null;
+    let previousNode: ListNode | null = null;
+
+    while(head) {
+        previousNode = new ListNode(head.val, previousNode);
+        head = head.next;
+    }
+
+    return previousNode;
 
 };
 
