@@ -1,7 +1,24 @@
 // Solution for: https://leetcode.com/problems/combinations
 const combine = (n: number, k: number): number[][] => {
 
-    return [];
+    const combinations = [];
+
+    const backtrack = (start: number, answer: number[]) =>{
+
+        if (answer.length === k) {
+            combinations.push([...answer]);
+        }
+
+        for (let i = start; i <= n && answer.length < k; i++) {
+            answer.push(i)
+            backtrack(i + 1, answer);
+            answer.pop();
+        }
+    }
+
+    backtrack(1, []);
+
+    return combinations;
 
 };
 
