@@ -1,7 +1,7 @@
 // Solution for: https://leetcode.com/problems/length-of-last-word/
 const lengthOfLastWord = (s: string): number => {
 
-    return 0;
+    return s.trim().split(/\s+/).pop().length;
 
 };
 
