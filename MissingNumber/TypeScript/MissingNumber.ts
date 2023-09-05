@@ -1,7 +1,11 @@
 // Solution for: https://leetcode.com/problems/missing-number/
 const missingNumber = (nums: number[]): number => {
 
-    return 0;
+    const n = nums.length;
+    const shouldBeTotal = (n * (n + 1)) / 2;
+    const actualTotal = nums.reduce((a, b) => a + b);
+
+    return shouldBeTotal - actualTotal;
 
 };
 
