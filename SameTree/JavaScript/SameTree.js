@@ -12,10 +12,13 @@ class TreeNode {
         this.right = (right === undefined ? null : right);
     }
 }
-function isSameTree(p, q) {
-    return false;
-}
-;
+const isSameTree = (p, q) => {
+    if (!p && !q)
+        return true;
+    if (!p || !q || p.val !== q.val)
+        return false;
+    return isSameTree(p.left, q.left) && isSameTree(p.right, q.right);
+};
 // test 1
 let node1 = new TreeNode(1, new TreeNode(2, null, null), new TreeNode(3, null, null));
 let node2 = new TreeNode(1, new TreeNode(2, null, null), new TreeNode(3, null, null));
