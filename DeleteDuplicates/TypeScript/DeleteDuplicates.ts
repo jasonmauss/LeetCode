@@ -14,7 +14,17 @@ class ListNode {
 
 const deleteDuplicates = (head: ListNode | null): ListNode | null => {
 
-    return null;
+    let currentNode = head;
+    while(currentNode && currentNode.next) {
+        if(currentNode.val === currentNode.next.val) {
+            currentNode.val = currentNode.next.val;
+            currentNode.next = currentNode.next.next;
+        } else {
+            currentNode = currentNode.next;
+        }
+    }
+
+    return head;
 
 };
 
