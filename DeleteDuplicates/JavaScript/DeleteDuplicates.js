@@ -11,7 +11,17 @@ class ListNode {
     }
 }
 const deleteDuplicates = (head) => {
-    return null;
+    let currentNode = head;
+    while (currentNode && currentNode.next) {
+        if (currentNode.val === currentNode.next.val) {
+            currentNode.val = currentNode.next.val;
+            currentNode.next = currentNode.next.next;
+        }
+        else {
+            currentNode = currentNode.next;
+        }
+    }
+    return head;
 };
 // some test cases
 let rootNode = new ListNode(1, new ListNode(1, new ListNode(2, null)));
