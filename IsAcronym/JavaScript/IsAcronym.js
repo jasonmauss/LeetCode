@@ -1,6 +1,9 @@
 // Solution for: https://leetcode.com/problems/check-if-a-string-is-an-acronym-of-words/
 const isAcronym = (words, s) => {
-    return false;
+    words.forEach((value, index, array) => {
+        words[index] = value.substring(0, 1);
+    });
+    return words.join('') === s;
 };
 // some test cases
 console.log(isAcronym(["alice", "bob", "charlie"], "abc")); // true
