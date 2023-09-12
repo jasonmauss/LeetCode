@@ -1,7 +1,16 @@
 // Solution for: https://leetcode.com/problems/count-pairs-whose-sum-is-less-than-target/
 const countPairs = (nums: number[], target: number): number => {
 
-    return 0;
+    let pairCount = 0;
+
+    for(let i = 0; i < nums.length; i++) {
+        let firstNum = nums[i];
+        for(let j = i + 1; j < nums.length; j++) {
+            if(firstNum + nums[j] < target) pairCount++;
+        }
+    }
+
+    return pairCount;
 
 };
 
