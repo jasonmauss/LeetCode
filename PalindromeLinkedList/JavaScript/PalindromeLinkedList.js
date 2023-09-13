@@ -11,7 +11,20 @@ class ListNode {
     }
 }
 const isPalindrome = (head) => {
-    return false;
+    const nodeValues = [];
+    while (head) {
+        nodeValues.push(head.val);
+        head = head.next;
+    }
+    let left = 0, right = nodeValues.length - 1;
+    while (left <= right) {
+        if (nodeValues[left] !== nodeValues[right]) {
+            return false;
+        }
+        left++;
+        right--;
+    }
+    return true;
 };
 // some test cases
 let rootNode = new ListNode(1, new ListNode(2, new ListNode(2, new ListNode(1, null))));
