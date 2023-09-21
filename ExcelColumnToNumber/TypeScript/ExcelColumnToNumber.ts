@@ -1,7 +1,14 @@
 // Solution for: https://leetcode.com/problems/excel-sheet-column-number/
-function titleToNumber(columnTitle: string): number {
+const titleToNumber = (columnTitle: string): number => {
 
-    return 0;
+    let runningTotal = 0;
+
+    for (let i = 0; i < columnTitle.length; i++) {
+        let exponent = columnTitle.length - i - 1;
+        runningTotal += Math.pow(26, exponent) * (columnTitle.charCodeAt(i) - 64);
+    }
+    
+    return runningTotal;
 
 };
 
@@ -11,3 +18,4 @@ function titleToNumber(columnTitle: string): number {
 console.log(titleToNumber("A")); // 1
 console.log(titleToNumber("AB")); // 28
 console.log(titleToNumber("ZY")); // 701
+console.log(titleToNumber("FXSHRXW")); // 2147483647
