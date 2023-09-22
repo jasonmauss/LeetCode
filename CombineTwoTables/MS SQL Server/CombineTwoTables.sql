@@ -19,4 +19,9 @@ INSERT INTO Address (addressId, personId, city, state) VALUES (1, 2, 'New York C
 INSERT INTO Address (addressId, personId, city, state) VALUES (2, 3, 'Leetcode', 'California');
 
 -- The actual query / solution
-
+	SELECT	p.firstName,
+			p.lastName,
+			a.city,
+			a.[state]
+	  FROM	Person	AS p
+ LEFT JOIN	Address AS a ON a.personId = p.personId
