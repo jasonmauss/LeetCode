@@ -1,4 +1,4 @@
--- Solution for: https://leetcode.com/problems/big-countries/ on MySQL dbms platform
+-- Solution for: https://leetcode.com/problems/combine-two-tables/ on MySQL dbms platform
 USE leetcodedb;
 
 CREATE TABLE IF NOT EXISTS Person (personId int, firstName varchar(255), lastName varchar(255));
