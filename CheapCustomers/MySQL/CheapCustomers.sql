@@ -16,4 +16,7 @@ INSERT INTO Orders (id, customerId) VALUES ('1', '3');
 INSERT INTO Orders (id, customerId) VALUES ('2', '1');
 
 -- The actual query / solution
-	
+		SELECT	c.name  AS 'Customers'
+	  FROM	Customers c
+ LEFT JOIN	Orders o ON o.customerId = c.id
+     WHERE	o.customerId IS NULL
