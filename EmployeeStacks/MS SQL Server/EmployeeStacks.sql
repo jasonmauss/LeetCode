@@ -16,4 +16,7 @@ INSERT INTO Employee (id, name, salary, managerId) values (4, 'Max', 90000, NULL
 
 
 -- The actual query / solution
-	
+	SELECT	e.name AS 'Employee'
+	  FROM	Employee AS e
+	  JOIN	Employee AS m ON m.id = e.managerId
+			AND e.salary > m.salary
