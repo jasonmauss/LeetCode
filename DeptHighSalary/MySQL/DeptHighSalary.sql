@@ -17,3 +17,11 @@ INSERT INTO Department (id, name) VALUES ('1', 'IT');
 INSERT INTO Department (id, name) VALUES ('2', 'Sales');
 
 -- The actual query / solution
+SELECT	d.name AS 'Department',
+			e.name AS 'Employee',
+			dept.salary AS 'Salary'
+	  FROM	Employee AS e
+	  JOIN	(SELECT departmentId, MAX(salary) AS salary FROM Employee GROUP BY departmentId) AS dept
+			ON dept.departmentId = e.departmentId AND e.salary = dept.salary
+ 
+	  JOIN	Department d ON d.id = e.departmentId
