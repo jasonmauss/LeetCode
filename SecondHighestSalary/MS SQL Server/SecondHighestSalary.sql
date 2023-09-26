@@ -13,4 +13,6 @@ INSERT INTO Employee (id, salary) VALUES (3, 300)
 
 -- The actual query / solution
 	
-	
+	SELECT	MAX(SALARY) AS 'SecondHighestSalary'
+	  FROM	Employee
+	 WHERE	(salary < (SELECT MAX(salary) FROM Employee))
