@@ -13,8 +13,15 @@ INSERT INTO Employee (id, salary) VALUES (3, 300);
 -- The actual query / solution
 CREATE FUNCTION getNthHighestSalary(N INT) RETURNS INT
 BEGIN
-  RETURN (
-      # Write your MySQL query statement below.
+    RETURN (
 
-  );
-END
+		SELECT sq.salary FROM 
+		(
+			SELECT	e.salary,
+					ROW_NUMBER() OVER (ORDER BY e.salary DESC) AS number
+			  FROM	(SELECT DISTINCT salary FROM Employee) e
+		) AS sq
+		WHERE sq.number = N
+
+    )
+END;
