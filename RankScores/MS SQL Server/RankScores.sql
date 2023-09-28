@@ -15,5 +15,7 @@ INSERT INTO Scores (id, score) VALUES (5, 4.0)
 INSERT INTO Scores (id, score) VALUES (6, 3.65)
 
 -- The actual query / solution
-	
+	SELECT	s.score,
+			DENSE_RANK() OVER (ORDER BY s.score DESC) AS 'rank'
+	  FROM	Scores s
 
