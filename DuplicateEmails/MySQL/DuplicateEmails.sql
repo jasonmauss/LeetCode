@@ -11,4 +11,7 @@ INSERT INTO Person (id, email) VALUES ('3', 'a@b.com');
 
 
 -- The actual query / solution
-
+SELECT	email
+	  FROM	Person
+	GROUP BY email
+	HAVING COUNT(email) > 1
