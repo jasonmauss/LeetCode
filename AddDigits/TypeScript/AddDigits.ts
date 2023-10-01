@@ -1,7 +1,20 @@
 // Solution for: https://leetcode.com/problems/add-digits/
 const addDigits = (num: number): number => {
 
-    return 0;
+    let digitString: string = num.toString();
+
+    while(digitString.length > 1) {
+
+        let sum: number = 0;
+
+        for(let i = 0; i < digitString.length; i++) {
+            sum += Number(digitString[i]);
+        }
+
+        digitString = sum.toString();
+    }
+
+    return Number(digitString);
 
 };
 
