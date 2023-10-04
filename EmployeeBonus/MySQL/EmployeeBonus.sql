@@ -17,4 +17,9 @@ INSERT INTO Bonus (empId, bonus) VALUES (4, 2000);
 
 
 -- The actual query / solution
-
+	SELECT	e.name,
+			b.bonus
+	  FROM	Employee e
+ LEFT JOIN	Bonus b ON b.empId = e.empId
+	 WHERE	ISNULL(b.bonus) = 1
+        OR  b.bonus < 1000
