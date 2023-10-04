@@ -12,9 +12,6 @@ END
 TRUNCATE TABLE Employee;
 TRUNCATE TABLE Bonus;
 
-
-
-
 INSERT INTO Employee (empId, name, supervisor, salary) VALUES (3, 'Brad', NULL, 4000)
 INSERT INTO Employee (empId, name, supervisor, salary) VALUES (1, 'John', 3, 1000)
 INSERT INTO Employee (empId, name, supervisor, salary) VALUES (2, 'Dan', 3, 2000)
@@ -25,5 +22,9 @@ INSERT INTO Bonus (empId, bonus) VALUES (4, 2000)
 
 
 -- The actual query / solution
-	
+	SELECT	e.name,
+			b.bonus
+	  FROM	Employee e
+ LEFT JOIN	Bonus b ON b.empId = e.empId
+	 WHERE	ISNULL(b.bonus, 0) < 1000
 
