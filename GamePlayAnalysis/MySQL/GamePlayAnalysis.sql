@@ -13,4 +13,7 @@ INSERT INTO Activity (player_id, device_id, event_date, games_played) VALUES (3,
 
 
 -- The actual query / solution
-
+	SELECT	player_id,
+			MIN(event_date) AS 'first_login'
+	  FROM	Activity
+  GROUP BY	player_id
