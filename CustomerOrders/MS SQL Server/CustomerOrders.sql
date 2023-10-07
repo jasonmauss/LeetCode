@@ -14,4 +14,9 @@ INSERT INTO orders (order_number, customer_number) VALUES (4, 3)
 
 
 -- The actual query / solution
-	
+	SELECT	a.customer_number FROM (
+	SELECT	TOP 1 customer_number,
+			COUNT(order_number) AS orders
+	  FROM	Orders
+  GROUP BY	customer_number
+  ORDER BY	COUNT(order_number) DESC) AS a
