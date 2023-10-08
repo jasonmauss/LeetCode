@@ -36,4 +36,14 @@ INSERT INTO Orders (order_id, order_date, com_id, sales_id, amount) VALUES (4, '
 
 
 -- The actual query / solution
-	
+	SELECT	DISTINCT sp.name
+	  FROM	SalesPerson sp
+	 WHERE	(sp.sales_id NOT IN 
+			(
+			 SELECT sales_id
+			   FROM Orders o
+			   JOIN	Company c ON c.com_id = o.com_id
+			  WHERE (UPPER(c.name) = 'RED')
+			)
+			)
+
