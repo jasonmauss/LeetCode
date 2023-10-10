@@ -16,4 +16,9 @@ INSERT INTO MyNumbers (num) VALUES (6);
 
 
 -- The actual query / solution
-	
+	SELECT  MAX(a.num) AS num FROM (
+	SELECT	num,
+			COUNT(num) AS instances
+	  FROM	MyNumbers
+  GROUP BY	num
+	HAVING	COUNT(num) = 1) a
