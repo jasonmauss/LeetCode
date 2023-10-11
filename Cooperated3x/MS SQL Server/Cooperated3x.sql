@@ -17,4 +17,8 @@ INSERT INTO ActorDirector (actor_id, director_id, timestamp) VALUES (2, 1, 6)
 
 
 -- The actual query / solution
-	
+	SELECT	actor_id,
+			director_id
+	  FROM	ActorDirector ad
+  GROUP BY	actor_id, director_id
+    HAVING	COUNT(*) >= 3
