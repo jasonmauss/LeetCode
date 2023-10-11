@@ -13,4 +13,11 @@ INSERT INTO cinema (id, movie, description, rating) VALUES (5, 'House card', 'In
 
 
 -- The actual query / solution
-
+	SELECT	c.id,
+			c.movie,
+			c.description,
+			c.rating
+	  FROM	cinema c
+	 WHERE	(c.description <> 'boring')
+	   AND	(c.id % 2 = 1)
+  ORDER BY	c.rating DESC
