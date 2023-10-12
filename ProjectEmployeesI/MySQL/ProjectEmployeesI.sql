@@ -22,4 +22,8 @@ INSERT INTO Employee (employee_id, name, experience_years) VALUES (4, 'Doe', 2);
 
 
 -- The actual query / solution
-
+	SELECT	p.project_id,
+			CAST(AVG(e.experience_years * 1.00) AS DECIMAL(4,2)) AS average_years
+	  FROM	Project p
+	  JOIN	Employee e ON e.employee_id = p.employee_id
+  GROUP BY	p.project_id
