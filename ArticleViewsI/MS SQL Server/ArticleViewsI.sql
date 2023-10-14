@@ -18,4 +18,7 @@ INSERT INTO Views (article_id, author_id, viewer_id, view_date) VALUES (3, 4, 4,
 
 
 -- The actual query / solution
-	
+	SELECT	DISTINCT v1.viewer_id AS id
+	  FROM	Views v1
+	 WHERE	v1.viewer_id = v1.author_id
+  ORDER BY	v1.viewer_id ASC
