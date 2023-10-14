@@ -19,4 +19,8 @@ INSERT INTO Activity (user_id, session_id, activity_date, activity_type) VALUES 
 
 
 -- The actual query / solution
-
+ SELECT		a.activity_date AS 'day',
+			COUNT(DISTINCT user_id) AS active_users
+	  FROM	Activity a
+	 WHERE	a.activity_date BETWEEN DATE_ADD('2019-07-27', INTERVAL -29 DAY) AND '2019-07-27'
+  GROUP BY	a.activity_date
