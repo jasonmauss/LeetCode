@@ -2,13 +2,13 @@
 
 -- Create the table and insert the data
 IF OBJECT_ID(N'dbo.Products', N'U') IS NULL BEGIN
-	CREATE TABLE Products (product_id int, product_name varchar(40), product_category varchar(40));
+	CREATE TABLE Products (product_id INT, product_name VARCHAR(40), product_category VARCHAR(40));
 END
 
 TRUNCATE TABLE Products;
 
 IF OBJECT_ID(N'dbo.Orders ', N'U') IS NULL BEGIN
-	CREATE TABLE Orders  (product_id int, order_date date, unit int);
+	CREATE TABLE Orders  (product_id INT, order_date DATE, unit INT);
 END
 
 TRUNCATE TABLE Orders ;
@@ -36,4 +36,9 @@ INSERT INTO Orders (product_id, order_date, unit) VALUES (5, '2020-03-01', 50)
 
 
 -- The actual query / solution
-	
+	SELECT	p.product_name,
+			SUM(CASE WHEN o.order_date BETWEEN '2020-02-01' AND '2020-02-29' THEN o.unit ELSE 0 END) AS unit
+	  FROM	Products p
+	  JOIN	Orders o ON o.product_id = p.product_id
+  GROUP BY	p.product_name
+	HAVING	SUM(CASE WHEN o.order_date BETWEEN '2020-02-01' AND '2020-02-29' THEN o.unit ELSE 0 END) >= 100
