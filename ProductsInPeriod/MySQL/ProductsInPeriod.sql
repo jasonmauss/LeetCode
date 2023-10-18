@@ -1,4 +1,4 @@
--- Solution for: https://leetcode.com/problems/students-and-examinations/ on MySQL dbms platform
+-- Solution for: https://leetcode.com/problems/list-the-products-ordered-in-a-period/ on MySQL dbms platform
 USE leetcodedb;
 
 CREATE TABLE IF NOT EXISTS Products (product_id INT, product_name VARCHAR(40), product_category VARCHAR(40));
