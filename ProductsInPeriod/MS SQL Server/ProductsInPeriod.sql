@@ -1,4 +1,4 @@
--- Solution for: https://leetcode.com/problems/students-and-examinations/ on mssql dbms platform
+-- Solution for: https://leetcode.com/problems/list-the-products-ordered-in-a-period/ on mssql dbms platform
 
 -- Create the table and insert the data
 IF OBJECT_ID(N'dbo.Products', N'U') IS NULL BEGIN
