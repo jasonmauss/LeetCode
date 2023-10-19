@@ -35,3 +35,9 @@ INSERT INTO Rides (id, user_id, distance) VALUES (9, 7, 230)
 
 
 -- The actual query / solution
+	SELECT	u.name,
+			ISNULL(SUM(r.distance), 0) AS travelled_distance
+	  FROM	Users u
+  LEFT JOIN	Rides r ON u.id = r.user_id
+  GROUP BY	u.id, u.name
+  ORDER BY	ISNULL(SUM(r.distance),0) DESC, u.name
