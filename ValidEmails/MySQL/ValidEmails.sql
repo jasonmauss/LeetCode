@@ -13,4 +13,8 @@ INSERT INTO Users (user_id, name, mail) VALUES (6, 'David', 'david69@gmail.com')
 INSERT INTO Users (user_id, name, mail) VALUES (7, 'Shapiro', '.shapo@leetcode.com');
 
 -- The actual query / solution
-	
+	SELECT	user_id,
+			name,
+			mail
+	  FROM  Users
+	 WHERE  REGEXP_LIKE(mail, '^[a-zA-Z][a-zA-Z0-9._-]*@leetcode\\.com$')

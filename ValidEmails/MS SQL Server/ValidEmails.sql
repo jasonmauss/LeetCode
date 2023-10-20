@@ -17,4 +17,9 @@ INSERT INTO Users (user_id, name, mail) VALUES (7, 'Shapiro', '.shapo@leetcode.c
 
 
 -- The actual query / solution
-	
+	SELECT	user_id,
+			name,
+			mail
+	  FROM	Users u
+	 WHERE	(mail LIKE '[a-zA-Z]%@leetcode.com')
+	   AND	(LEFT(mail, LEN(mail) - 13) NOT LIKE '%[^0-9a-zA-Z_.-]%')
