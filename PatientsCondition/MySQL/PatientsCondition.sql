@@ -13,4 +13,8 @@ INSERT INTO Patients (patient_id, patient_name, conditions) VALUES (5, 'Alain', 
 
 
 -- The actual query / solution
-	
+	SELECT	patient_id,
+			patient_name,
+			conditions
+	  FROM	Patients p
+	 WHERE	(p.conditions LIKE '%DIAB1%')
