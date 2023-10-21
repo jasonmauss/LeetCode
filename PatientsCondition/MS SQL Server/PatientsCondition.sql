@@ -19,4 +19,5 @@ INSERT INTO Patients (patient_id, patient_name, conditions) VALUES (5, 'Alain', 
 			patient_name,
 			conditions
 	  FROM	Patients p
-	 WHERE	(p.conditions LIKE '%DIAB1')
+	 WHERE	(p.conditions LIKE '% DIAB1%')
+	    OR  (p.conditions LIKE 'DIAB1%')
