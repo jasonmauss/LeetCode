@@ -32,3 +32,10 @@ INSERT INTO Register (contest_id, user_id) VALUES (210, 7)
 
 
 -- The actual query / solution
+	;WITH cte AS (SELECT COUNT(1) AS user_count FROM Users)
+	SELECT	r.contest_id,
+			CAST((COUNT(r.contest_id)) / ((SELECT user_count FROM cte) * 1.00) * 100 AS DECIMAL(5,2)) AS percentage
+	  FROM	Register r
+	  JOIN	Users u ON u.user_id = r.user_id
+  GROUP BY	r.contest_id
+  ORDER BY	2 DESC, 1 ASC
