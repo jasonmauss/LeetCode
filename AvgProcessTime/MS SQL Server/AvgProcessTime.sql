@@ -22,4 +22,10 @@ INSERT INTO Activity (machine_id, process_id, activity_type, timestamp) values (
 
 
 -- The actual query / solution
-	
+	SELECT	started.machine_id,
+			ROUND(AVG(ended.timestamp - started.timestamp), 3) AS processing_time
+	  FROM	Activity started
+	  JOIN	Activity ended   ON started.machine_id = ended.machine_id 
+							AND started.process_id = ended.process_id
+							AND started.activity_type = 'start' AND ended.activity_type = 'end'
+  GROUP BY	started.machine_id
