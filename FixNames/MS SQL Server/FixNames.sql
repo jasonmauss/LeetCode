@@ -12,4 +12,7 @@ INSERT INTO Users (user_id, name) VALUES ('2', 'bOB')
 
 
 -- The actual query / solution
-	
+	SELECT	u.user_id,
+			UPPER(LEFT(u.name,1)) + LOWER(RIGHT(u.name, LEN(u.name) - 1)) AS name
+	  FROM	Users u
+  ORDER BY	u.user_id
