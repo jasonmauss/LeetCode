@@ -13,6 +13,10 @@ INSERT INTO Followers (user_id, follower_id) VALUES (2, 1);
 
 
 -- The actual query / solution
-	
+	SELECT	f.user_id
+			,COUNT(f.user_id) AS followers_count
+	  FROM	Followers f
+  GROUP BY	f.user_id
+  ORDER BY	f.user_id
 
 
