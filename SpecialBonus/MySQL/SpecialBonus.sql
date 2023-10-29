@@ -14,6 +14,9 @@ INSERT INTO Employees (employee_id, name, salary) VALUES (9, 'Kannon', 7700);
 
 
 -- The actual query / solution
-	
+	SELECT	employee_id,
+			CASE WHEN e.employee_id % 2 = 1 AND e.name NOT LIKE 'M%' THEN e.salary ELSE 0 END AS bonus
+	  FROM	Employees e
+  ORDER BY	e.employee_id
 
 
