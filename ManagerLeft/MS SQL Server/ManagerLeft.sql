@@ -18,5 +18,11 @@ INSERT INTO Employees (employee_id, name, manager_id, salary) values (11, 'Jozia
 
 
 -- The actual query / solution
-
+	SELECT	e.employee_id
+	  FROM	Employees e
+ LEFT JOIN	Employees e2 ON e2.employee_id = e.manager_id
+	 WHERE	(e.salary < 30000)
+	   AND	(e2.employee_id IS NULL)
+	   AND	(e.manager_id IS NOT NULL)
+  ORDER BY	(e.employee_id)
 
