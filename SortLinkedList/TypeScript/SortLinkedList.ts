@@ -11,7 +11,28 @@ class ListNode {
 }
 
 const sortList = (head: ListNode | null): ListNode | null => {
-    return null;
+    
+    let nodesArray = [];
+
+    let currentNode = head;
+    while(currentNode) {
+        nodesArray.push(currentNode.val);
+        currentNode = currentNode.next;
+    }
+
+    nodesArray.sort((a,b) => b - a);
+
+    currentNode = head;
+
+    const setValue = (node: ListNode | null): void => {
+        if(!node) return;
+        node.val = nodesArray.pop();
+        setValue(node.next);
+    }
+
+    setValue(head);
+
+    return head;
 };
 
 // some tests
