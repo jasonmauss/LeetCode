@@ -15,26 +15,28 @@ class ListNode {
 const insertionSortList = (head: ListNode | null): ListNode | null => {
 
     if (!head) return null
-  if (!head.next) return head
+    if (!head.next) return head
 
-  let output = head
-  let curr = head.next
+    let output = head
+    let curr = head.next
 
-  head.next = null
+    head.next = null
 
-  while (curr) {
-    const next = curr.next
-    const insertion = curr
+    while (curr) {
 
-    output = insert(output, insertion)
-    curr = next as ListNode
-  }
+        const next = curr.next
+        const insertion = curr
 
-  return output
+        output = insert(output, insertion)
+        curr = next as ListNode
+    }
+
+    return output;
 
 };
 
 function insert(head: ListNode, other: ListNode) {
+
     let curr = head
     const val = other.val
   
@@ -54,9 +56,9 @@ function insert(head: ListNode, other: ListNode) {
       curr = curr.next as ListNode
     }
   
-    return head
+    return head;
   }
-  
+
 // some tests
 let head1 = new ListNode(4,
     new ListNode(2,
