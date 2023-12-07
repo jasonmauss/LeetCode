@@ -1,8 +1,30 @@
 // Solution for: https://leetcode.com/problems/pancake-sorting/
 const pancakeSort = (arr: number[]): number[] => {
     
-    return [];
+    const pancakeFlips: number[] = [];
 
+    for(let i = arr.length; i > 0; --i) {
+        if(i === arr[i - 1]) continue;
+
+        const element = 1 + arr.indexOf(i);
+        pancakeFlips.push(element, i);
+
+        reverseArraySegment(arr, 0, element);
+        reverseArraySegment(arr, 0, i);
+    }
+
+    return pancakeFlips;
+};
+
+const reverseArraySegment = (arraySegment: number[], minPos = 0, maxPos = arraySegment.length): void => {
+    
+    --maxPos;
+
+    while(minPos < maxPos) {
+        const tempVal = arraySegment[minPos];
+        arraySegment[minPos++] = arraySegment[maxPos];
+        arraySegment[maxPos--] = tempVal;
+    }
 };
 
 
