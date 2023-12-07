@@ -1,31 +1,29 @@
 // Solution for: https://leetcode.com/problems/pancake-sorting/
 const pancakeSort = (arr: number[]): number[] => {
     
+    const sortedCopy = [...arr].sort((a, b) => a - b);
     const pancakeFlips: number[] = [];
 
-    for(let i = arr.length; i > 0; --i) {
-        if(i === arr[i - 1]) continue;
+    const flipIt = (curPos:number, nextPos:number):void => {
+        const firstFlip = arr.splice(0, curPos + 1);
+        firstFlip.reverse();
+        const nextSegment = arr.splice(0, nextPos - curPos);
+        const secondFlip = [...firstFlip, ...nextSegment].reverse();
+        arr = [...secondFlip, ...arr];
+        pancakeFlips.push(curPos + 1, nextPos + 1);
+    };
 
-        const element = 1 + arr.indexOf(i);
-        pancakeFlips.push(element, i);
-
-        reverseArraySegment(arr, 0, element);
-        reverseArraySegment(arr, 0, i);
+    for(let i = sortedCopy.length - 1; i >= 0; --i) {
+        if(arr[i] !== sortedCopy[i]) {
+            flipIt(arr.indexOf(sortedCopy[i]), i);
+        }
     }
 
     return pancakeFlips;
+
 };
 
-const reverseArraySegment = (arraySegment: number[], minPos = 0, maxPos = arraySegment.length): void => {
-    
-    --maxPos;
 
-    while(minPos < maxPos) {
-        const tempVal = arraySegment[minPos];
-        arraySegment[minPos++] = arraySegment[maxPos];
-        arraySegment[maxPos--] = tempVal;
-    }
-};
 
 
 // some tests
