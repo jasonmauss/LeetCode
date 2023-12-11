@@ -11,7 +11,7 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\SortBy.js",
+            "program": "${workspaceFolder}\\MinRightShifts.js",
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ]
