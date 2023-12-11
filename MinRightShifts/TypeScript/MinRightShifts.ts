@@ -2,7 +2,15 @@
 
 const minimumRightShifts = (nums: number[]): number => {
 
-    return 0;
+    const sortedNums = [...nums].sort((a, b) => a - b);
+    if (JSON.stringify(nums) == JSON.stringify(sortedNums)) return 0;
+
+    for(let i = 0; i < nums.length; i++) {
+        nums.unshift(nums.pop());
+        if (JSON.stringify(nums) == JSON.stringify(sortedNums)) return i + 1;
+    }
+
+    return -1;
 
 };
 
