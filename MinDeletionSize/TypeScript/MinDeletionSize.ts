@@ -2,7 +2,21 @@
 
 const minDeletionSize = (strs: string[]): number => {
     
-    return 0;
+    const strsSize = strs[0].length;
+    const length = strs.length;
+    let deletions = 0;
+
+    for(let i = 0; i < strsSize; i++) {
+        const values = [];
+        for(let j = 1; j < length; j++) {
+            if(strs[j -1].charCodeAt(i) > strs[j].charCodeAt(i)) {
+                deletions++;
+                break;
+            }
+        }
+    }
+
+    return deletions;
 
 };
 
