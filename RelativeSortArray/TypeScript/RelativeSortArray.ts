@@ -2,7 +2,23 @@
 
 const relativeSortArray = (arr1: number[], arr2: number[]): number[] => {
     
-    return [];
+    const relativeSorted:number[] = []
+    const included:number[] = [];
+
+    for(let i = 0; i < arr2.length; i++) {
+        const compareValue = arr2[i];
+        for(let j = 0; j < arr1.length; j++) {
+            if(arr1[j] === compareValue) {
+                included.push(...arr1.splice(j, 1));
+                j--;
+            }
+        }
+    }
+
+    relativeSorted.push(...included);
+    relativeSorted.push(...arr1.sort((a,b) => a - b));
+
+    return relativeSorted;
 
 };
 
