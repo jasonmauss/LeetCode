@@ -2,11 +2,17 @@
 
 const countNegatives = (grid: number[][]): number => {
     
-    return 0;
+    let totalNegatives = 0;
     
+    for(const nums of grid) {
+        totalNegatives += nums.filter(x => x < 0).length;
+    }
+
+    return totalNegatives;
 };
 
-
+// could do a one-liner like return grid.flat().filter(x => x < 0).length
+// but that's actually less performant than just looping through each sub-array.
 
 
 // some tests
