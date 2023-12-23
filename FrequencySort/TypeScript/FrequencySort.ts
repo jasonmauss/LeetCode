@@ -2,7 +2,27 @@
 
 const frequencySort = (nums: number[]): number[] => {
 
-    return [];
+    const frequencyMap = new Map<number, number>();
+    const frequencySortedArray:number[] = [];
+
+    for(let num of nums) {
+        frequencyMap.set(num, (frequencyMap.get(num) || 0) + 1);
+    }
+
+    const sortedFrequency = [...frequencyMap.entries()].sort((a, b) => {
+        if(a[1] != b[1]) {
+            return a[1] - b[1];
+        }
+        return b[0] - a[0];
+    });
+
+    for(let item of sortedFrequency) {
+        for(let i = 0; i < item[1]; ++i) {
+            frequencySortedArray.push(item[0]);
+        }
+    }
+
+    return frequencySortedArray;
     
 };
 
