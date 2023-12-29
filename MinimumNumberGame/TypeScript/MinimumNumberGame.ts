@@ -1,7 +1,20 @@
 // Solution for: https://leetcode.com/problems/minimum-number-game/
-function numberGame(nums: number[]): number[] {
-    return [];
+const numberGame = (nums: number[]): number[] => {
+
+    const returnArray:number[] = [];
+
+    nums.sort((a,b) => a - b);
+
+    while(nums.length > 0) {
+        const temp = nums.shift();
+        returnArray.push(nums.shift());
+        returnArray.push(temp);
+    }
+
+    return returnArray;
+
 };
+
 
 
 
