@@ -2,7 +2,21 @@
 
 const findMissingAndRepeatedValues = (grid: number[][]): number[] => {
     
-    return [];
+    let missing:number = 0;
+    let repeated:number = 0;
+    let numberTracking:number[] = new Array(Math.pow(grid.length, 2)).fill(0);
+
+    for(let i = 0; i < grid.length; i++) {
+        for(let j = 0; j < grid[i].length; j++) {
+            let temp = grid[i][j] - 1;
+            numberTracking[temp]++;
+            if(numberTracking[temp] === 2) repeated = temp + 1;
+        }
+    }
+
+    missing = numberTracking.findIndex((x) => x === 0) + 1;
+
+    return [repeated, missing];
 
 };
 
