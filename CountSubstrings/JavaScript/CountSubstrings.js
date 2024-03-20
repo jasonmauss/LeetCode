@@ -1,6 +1,7 @@
 // Solution for: https://leetcode.com/problems/count-substrings-starting-and-ending-with-given-character/description/
 const countSubstrings = (s, c) => {
-    return 0;
+    const occurenceCount = s.split('').filter((x) => x === c).length;
+    return occurenceCount * (occurenceCount + 1) / 2;
 };
 // some test cases
 console.log(countSubstrings('abada', 'a')); // 6
