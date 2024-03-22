@@ -1,4 +1,4 @@
--- Solution for: https://leetcode.com/problems/managers-with-at-least-5-direct-reports/?envType=study-plan-v2&envId=top-sql-50 on mssql dbms platform
+-- Solution for: https://leetcode.com/problems/managers-with-at-least-5-direct-reports on mssql dbms platform
 
 USE leetcodedb;
 
@@ -19,4 +19,12 @@ INSERT INTO Employee (id, name, department, managerId) VALUES (106, 'Ron', 'B', 
 
 -- The actual query / solution
 
-
+	SELECT	emp.[name]
+	  FROM	Employee emp
+INNER JOIN	(SELECT COUNT(e.managerId) AS reports,
+					e.managerId AS id
+			   FROM	Employee e
+			  WHERE	(e.managerId IS NOT NULL)
+		   GROUP BY	e.managerId
+			) AS managers ON  managers.id = emp.id
+	 WHERE	(managers.reports >= 5)
