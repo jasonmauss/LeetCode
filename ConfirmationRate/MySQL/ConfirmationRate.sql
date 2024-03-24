@@ -19,6 +19,16 @@ INSERT INTO Confirmations (user_id, time_stamp, action) VALUES ('2', '2021-02-28
 
 
 -- The actual query / solution
-	
+	SELECT	su.user_id,
+			IFNULL(counts.confirmed_total, 0.00) AS confirmation_rate
+	  FROM	Signups su
+ LEFT JOIN	(SELECT	c.user_id,
+					
+					CAST(SUM(CASE WHEN c.action = 'confirmed' THEN 1.00 ELSE 0.00 END) / COUNT(c.user_id) AS DECIMAL(4,2)) AS confirmed_total
+			   FROM	Confirmations c
+
+			 GROUP BY c.user_id
+					  
+			) AS counts ON su.user_id = counts.user_id
 
 
