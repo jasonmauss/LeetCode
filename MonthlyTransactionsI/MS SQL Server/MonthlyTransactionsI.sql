@@ -17,4 +17,12 @@ INSERT INTO Transactions (id, country, state, amount, trans_date) VALUES (124, '
 
 -- The actual query / solution
 	
+	SELECT	CAST(YEAR(trans_date) AS CHAR(4)) + '-' + RIGHT('0' + CAST(MONTH(trans_date) AS VARCHAR(2)), 2) AS [month],
+			country,
+			COUNT(id) AS trans_count,
+			SUM(CASE WHEN [state] = 'approved' THEN 1 ELSE 0 END) AS approved_count,
+			SUM(amount) AS trans_total_amount,
+			SUM(CASE WHEN [state] = 'approved' THEN amount ELSE 0 END) AS approved_total_amount
+	  FROM	Transactions tx
+  GROUP BY	CAST(YEAR(trans_date) AS CHAR(4)) + '-' + RIGHT('0' + CAST(MONTH(trans_date) AS VARCHAR(2)), 2), country
 
