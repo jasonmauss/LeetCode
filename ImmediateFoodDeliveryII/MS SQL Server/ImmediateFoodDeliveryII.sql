@@ -19,6 +19,15 @@ INSERT INTO Delivery (delivery_id, customer_id, order_date, customer_pref_delive
 
 
 -- The actual query / solution
-	
-
+	SELECT	ROUND(
+					100.0 * SUM(CASE WHEN order_date = customer_pref_delivery_date THEN 1 ELSE 0 END)
+					/
+					COUNT(DISTINCT customer_id), 2
+				 ) AS immediate_percentage
+	  FROM	Delivery d1
+	 WHERE	EXISTS (SELECT 1
+					  FROM Delivery d2
+					 WHERE d2.customer_id = d1.customer_id
+				  GROUP BY d2.customer_id
+				HAVING MIN(d2.order_date) = d1.order_date);
 
