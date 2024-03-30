@@ -17,5 +17,16 @@ insert into Activity (player_id, device_id, event_date, games_played) VALUES (3,
 
 
 -- The actual query / solution
+WITH FIRST_LOGIN_CTE AS
+			(SELECT	player_id,
+					MIN(event_date) AS first_login
+			   FROM	activity
+		   GROUP BY	player_id
+			)
 
+	SELECT	ROUND(CAST(SUM(CASE WHEN DATEDIFF(DAY, first_login, event_date) = 1 THEN 1.00 ELSE 0.00 END) AS FLOAT)
+			/
+			COUNT(DISTINCT FIRST_LOGIN_CTE.player_id), 2) AS fraction
+	  FROM	FIRST_LOGIN_CTE
+INNER JOIN	activity a ON a.player_id = FIRST_LOGIN_CTE.player_id
 
