@@ -18,4 +18,8 @@ INSERT INTO Product (product_key) VALUES ('6');
 
 
 -- The actual query / solution
-
+	  SELECT cx.customer_id
+	    FROM (SELECT DISTINCT customer_id, product_key
+				FROM Customer c) cx
+	GROUP BY cx.customer_id
+	  HAVING COUNT(cx.customer_id) = (SELECT COUNT(DISTINCT product_key) AS product_count FROM Product)
