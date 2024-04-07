@@ -18,4 +18,13 @@ INSERT INTO Products (product_id, new_price, change_date) VALUES (3, 20, '2019-0
 
 
 -- The actual query / solution
+	SELECT	DISTINCT p.product_id,
+			ISNULL(sq.price, 10) AS price
+	  FROM	Products p
+ LEFT JOIN	(	SELECT	RANK() OVER(PARTITION BY p.product_id ORDER BY p.change_date DESC) AS [rank], 
+						p.product_id,
+						p.new_price AS price
+				  FROM	Products p
+				 WHERE	(p.change_date <= '2019-08-16')
+			) AS sq ON sq.product_id = p.product_id AND sq.rank = 1
 
