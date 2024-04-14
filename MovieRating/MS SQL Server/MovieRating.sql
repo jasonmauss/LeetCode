@@ -58,5 +58,3 @@ SELECT rater.results FROM (
 		   GROUP BY	mr.movie_id) AS AvgRating ON AvgRating.movie_id = m.movie_id
   ORDER BY	AvgRating.rating_value DESC, m.title
   ) AS movie
-
-  SELECT DATEPART(MONTH, '2020-02-01')
