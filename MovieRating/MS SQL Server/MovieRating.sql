@@ -40,4 +40,23 @@ INSERT INTO MovieRating (movie_id, user_id, rating, created_at) VALUES (3, 2, 4,
 
 
 -- The actual query / solution
+SELECT rater.results FROM (
+	SELECT	TOP 1 u.name AS results
+	  FROM	Users u
+	  JOIN	(SELECT COUNT(mr.user_id) AS ratings, mr.user_id
+			   FROM	MovieRating mr
+		   GROUP BY	mr.user_id) RatingCounts ON RatingCounts.user_id = u.user_id
+  ORDER BY	RatingCounts.ratings DESC, u.name) AS rater
 
+  UNION ALL SELECT movie.results FROM (
+
+	SELECT	TOP 1 title AS results
+	  FROM	Movies m
+	  JOIN	(SELECT	mr.movie_id, AVG(mr.rating * 1.00) * 1.0 AS rating_value 
+			   FROM	MovieRating mr
+			  WHERE	(MONTH(mr.created_at) = 2 AND YEAR(mr.created_at) = 2020)
+		   GROUP BY	mr.movie_id) AS AvgRating ON AvgRating.movie_id = m.movie_id
+  ORDER BY	AvgRating.rating_value DESC, m.title
+  ) AS movie
+
+  SELECT DATEPART(MONTH, '2020-02-01')
