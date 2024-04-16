@@ -23,3 +23,23 @@ INSERT INTO Customer (customer_id, name, visited_on, amount) VALUES (3, 'Jade', 
 
 
 -- The actual query / solution
+WITH groupedCTE (visited_on, amount) AS (
+    SELECT	visited_on,
+			SUM(amount) AS amount
+	  FROM	Customer 
+  GROUP BY	visited_on
+),
+
+rollingAvg(visited_on, amount, average) AS (
+    SELECT	visited_on, 
+			SUM(amount) OVER(ORDER BY visited_on ROWS BETWEEN 6 PRECEDING AND CURRENT ROW) AS amount, 
+			ROUND(AVG(amount * 1.0) OVER(ORDER BY visited_on ROWS BETWEEN 6 PRECEDING AND CURRENT ROW), 2) AS average_amount 
+      FROM	groupedCTE
+)
+
+	SELECT	visited_on,
+			amount,
+			CAST(average AS decimal(5,2)) AS average_amount
+	  FROM	rollingAvg 
+  ORDER BY	visited_on
+    OFFSET	6 ROWS;
