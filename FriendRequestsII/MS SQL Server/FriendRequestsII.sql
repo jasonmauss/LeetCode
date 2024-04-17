@@ -16,3 +16,19 @@ INSERT INTO RequestAccepted (requester_id, accepter_id, accept_date) VALUES (3, 
 
 
 -- The actual query / solution
+	SELECT	TOP 1 dataset.id,
+			SUM(dataset.RequestOrAcceptCount) AS num 
+	  FROM (SELECT	ra.requester_id AS id,
+					COUNT(ra.requester_id) AS RequestOrAcceptCount
+			  FROM	RequestAccepted ra
+		  GROUP BY	ra.requester_id
+		
+			 UNION	ALL
+
+			SELECT	ra.accepter_id AS id,
+					COUNT(ra.accepter_id) AS RequestOrAcceptCount
+			  FROM	RequestAccepted ra
+		  GROUP BY	ra.accepter_id) AS dataset
+
+  GROUP BY	dataset.id
+  ORDER BY	SUM(dataset.RequestOrAcceptCount) DESC
