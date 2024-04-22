@@ -19,3 +19,14 @@ INSERT INTO Department (id, name) VALUES ('1', 'IT');
 INSERT INTO Department (id, name) VALUES ('2', 'Sales');
 
 -- The actual query / solution
+	SELECT	Department,
+			Employee,
+			Salary
+	  FROM (SELECT	d.name AS Department,
+					e.name AS Employee,
+					e.Salary AS Salary,
+					DENSE_RANK() OVER (PARTITION BY d.name ORDER BY e.salary DESC) AS position
+			  FROM	Employee e 
+			  JOIN	Department d ON e.DepartmentId= d.Id
+			) sq 
+	 WHERE	(sq.position <= 3)
