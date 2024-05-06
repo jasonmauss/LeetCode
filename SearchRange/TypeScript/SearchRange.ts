@@ -2,8 +2,25 @@
 
 const searchRange = (nums: number[], target: number): number[] => {
     
-    return [];
+    let firstPosition = -1;
+    let lastPosition = -1;
 
+    if(nums.length > 0) {
+        for(let i = 0; i < nums.length; ++i) {
+            if(nums[i] === target) {
+                if(firstPosition === -1) {
+                    firstPosition = i;
+                    lastPosition = i;
+                } else {
+                    lastPosition = i;
+                }
+            }
+        }
+
+        if(lastPosition === -1) firstPosition = -1;
+    }
+
+    return [firstPosition, lastPosition];
 };
 
 
