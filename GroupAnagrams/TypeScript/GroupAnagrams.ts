@@ -1,7 +1,22 @@
 // Solution for: https://leetcode.com/problems/group-anagrams
 
 const groupAnagrams = (strs: string[]): string[][] => {
-    return [['']];
+    
+    const strsMap = new Map();
+
+    for (const str of strs) {
+        const sortedStr = str.split('').sort().join('');
+        const values = strsMap.get(sortedStr) || [];
+
+        strsMap.set(sortedStr, values.concat(str));
+    }
+
+    const result = [];
+    for (const [_, value] of strsMap) {
+        result.push(value);
+    }
+    
+    return result;
 };
 
 
