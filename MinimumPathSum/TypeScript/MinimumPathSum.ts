@@ -2,7 +2,35 @@
 
 const minPathSum = (grid: number[][]): number => {
     
-    return 0;
+    const rowCount = grid.length;
+    const colCount = grid[0].length;
+
+    // populate a two-dimensional array with zeros
+    const pathValues:number[][] = Array.from(Array(rowCount), (v,k) => new Array(colCount).fill(0));
+
+    let pathSum = 0;
+
+    for(let i = 0; i < rowCount; ++i) {
+        pathSum += grid[i][0];
+        pathValues[i][0] = pathSum;
+    }
+
+    pathSum = 0;
+
+    for(let j = 0; j < colCount; ++j) {
+        pathSum += grid[0][j];
+        pathValues[0][j] = pathSum;
+    }
+
+    for(let i = 1; i < rowCount; ++i) {
+        for(let j = 1; j < colCount; ++j) {
+            const minPath = Math.min(pathValues[i - 1][j], pathValues[i][j - 1]);
+            pathValues[i][j] = grid[i][j] + minPath;
+        }
+    }
+
+    return pathValues[rowCount - 1][colCount - 1];
+
 
 };
 
