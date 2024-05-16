@@ -15,9 +15,20 @@ class TreeNode {
     }
 }
 
+const isMirroredNode = (leftNode:TreeNode | null, rightNode:TreeNode | null): boolean => {
+
+    if(leftNode === null && rightNode === null) return true;
+    if(leftNode === null || rightNode === null) return false;
+
+    return (leftNode.val === rightNode.val) &&
+            isMirroredNode(leftNode.left, rightNode.right) &&
+            isMirroredNode(leftNode.right, rightNode.left);
+
+};
+
 const isSymmetric = (root: TreeNode | null): boolean => {
     
-    return false;
+    return isMirroredNode(root, root);
 
 };
 

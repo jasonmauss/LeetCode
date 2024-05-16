@@ -10,8 +10,17 @@ var TreeNode = /** @class */ (function () {
     }
     return TreeNode;
 }());
+var isMirroredNode = function (leftNode, rightNode) {
+    if (leftNode === null && rightNode === null)
+        return true;
+    if (leftNode === null || rightNode === null)
+        return false;
+    return (leftNode.val === rightNode.val) &&
+        isMirroredNode(leftNode.left, rightNode.right) &&
+        isMirroredNode(leftNode.right, rightNode.left);
+};
 var isSymmetric = function (root) {
-    return false;
+    return isMirroredNode(root, root);
 };
 // some test cases
 var node1 = new TreeNode(1, new TreeNode(2, new TreeNode(3, null, null), new TreeNode(4, null, null)), new TreeNode(2, new TreeNode(4, null, null), new TreeNode(3, null, null)));
