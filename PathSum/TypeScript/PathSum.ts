@@ -13,8 +13,18 @@ class TreeNode {
     }
 }
 
-const hasPathSum = (root: TreeNode | null, targetSum: number): boolean => {
-    return false;
+const hasPathSum = (root: TreeNode | null, targetSum: number, currentSum:number = 0): boolean => {
+    
+    if(!root) return false;
+
+    currentSum += root.val;
+
+    if(!root.left && !root.right) {
+        return currentSum === targetSum;
+    }
+
+    return hasPathSum(root.left, targetSum, currentSum) || hasPathSum(root.right, targetSum, currentSum);
+
 };
 
 
