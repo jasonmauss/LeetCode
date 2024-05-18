@@ -8,8 +8,15 @@ var TreeNode = /** @class */ (function () {
     }
     return TreeNode;
 }());
-var hasPathSum = function (root, targetSum) {
-    return false;
+var hasPathSum = function (root, targetSum, currentSum) {
+    if (currentSum === void 0) { currentSum = 0; }
+    if (!root)
+        return false;
+    currentSum += root.val;
+    if (!root.left && !root.right) {
+        return currentSum === targetSum;
+    }
+    return hasPathSum(root.left, targetSum, currentSum) || hasPathSum(root.right, targetSum, currentSum);
 };
 var rootNode1 = new TreeNode(5, new TreeNode(4, new TreeNode(11, new TreeNode(7, null, null), new TreeNode(2, null, null)), null), new TreeNode(8, new TreeNode(13, null, null), new TreeNode(4, null, new TreeNode(1, null, null))));
 // some test cases
