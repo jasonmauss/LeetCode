@@ -2,7 +2,18 @@
 
 const singleNumber = (nums: number[]): number => {
     
-    return 0;
+    const countsArray = [];
+
+    for(let num of nums) {
+        let potentiallyExistingObject = countsArray.find((obj) => obj.id === num);
+        if(potentiallyExistingObject) {
+            potentiallyExistingObject.value += 1;
+        } else {
+            countsArray.push({id:num, value: 1});
+        }
+    }
+
+    return countsArray.find((obj) => obj.value === 1).id;
 
 };
 
