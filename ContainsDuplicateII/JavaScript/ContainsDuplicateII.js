@@ -1,5 +1,13 @@
 // Solution for: https://leetcode.com/problems/contains-duplicate-ii/description/
 var containsNearbyDuplicate = function (nums, k) {
+    var existingNums = new Set();
+    for (var i = 0; i < nums.length; i++) {
+        if (existingNums.has(nums[i]))
+            return true;
+        existingNums.add(nums[i]);
+        if (existingNums.size > k)
+            existingNums.delete(nums[i - k]);
+    }
     return false;
 };
 // some test cases
