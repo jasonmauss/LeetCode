@@ -11,7 +11,24 @@ var solution = function(isBadVersion: any) {
 
     return function(n: number): number {
         
-        return 0;
+        // for most optimal solution on a larger range
+        // we can use binary search for this.
+        let left = 1;
+        let right = n;
+
+        while(left <= right) {
+            const midPoint = Math.floor((left + right) / 2);
+
+            const isMidPointBadVersion = isBadVersion(midPoint);
+
+            if(isMidPointBadVersion) {
+                right = midPoint - 1;
+            } else {
+                left = midPoint + 1;
+            }
+        }
+
+        return left;
 
     };
 };
