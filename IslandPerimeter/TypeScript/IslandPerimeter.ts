@@ -2,7 +2,24 @@
 
 const islandPerimeter = (grid: number[][]): number => {
     
-    return 0;
+    let perimeter = 0;
+    const rows = grid.length;
+    const cols = grid[0].length;
+
+    for(let i = 0; i < rows; i++){
+        for(let j = 0; j < cols; j++){
+            if(grid[i][j] === 1) {
+
+                if (grid[i]?.[j-1] !==1 ) perimeter++;
+                if (grid[i]?.[j+1] !==1 ) perimeter++;
+                if (grid[i-1]?.[j] !==1 ) perimeter++;
+                if (grid[i+1]?.[j] !==1 ) perimeter++;
+
+            }
+        }
+    }
+    
+    return perimeter;
 
 };
 
