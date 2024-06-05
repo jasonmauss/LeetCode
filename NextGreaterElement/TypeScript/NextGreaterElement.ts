@@ -2,7 +2,31 @@
 
 const nextGreaterElement = (nums1: number[], nums2: number[]): number[] => {
     
-    return [0];
+    const returnElements:number[] = [];
+    let elementFound:boolean = false;
+
+    for(let num of nums1) {
+        let valToPush = -1;
+        for(let i = 0; i < nums2.length; i++) {
+
+            if(num === nums2[i]) {
+                elementFound = true;
+            }
+
+            if(elementFound && nums2[i] > num) {
+                valToPush = nums2[i];
+            }
+
+            if(i === nums2.length - 1 || valToPush !== -1) {
+                returnElements.push(valToPush);
+                break;
+            }
+        }
+        
+        elementFound = false;
+    }
+
+    return returnElements;
 
 };
 
