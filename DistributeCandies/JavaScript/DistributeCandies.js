@@ -1,6 +1,7 @@
 // Solution for: https://leetcode.com/problems/distribute-candies
 var distributeCandies = function (candyType) {
-    return 0;
+    var uniqueCandies = new Set(candyType);
+    return Math.min(new Set(candyType).size, (candyType.length / 2));
 };
 // some test cases
 console.log(distributeCandies([1, 1, 2, 2, 3, 3])); // 3
