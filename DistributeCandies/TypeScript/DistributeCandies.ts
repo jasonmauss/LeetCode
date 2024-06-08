@@ -2,7 +2,9 @@
 
 const distributeCandies = (candyType: number[]): number => {
     
-    return 0;
+    const uniqueCandies:Set<number> = new Set<number>(candyType);
+
+    return Math.min(new Set<number>(candyType).size, (candyType.length / 2));
 
 };
 
