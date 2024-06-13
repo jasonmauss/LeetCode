@@ -2,7 +2,17 @@
 
 const constructRectangle = (area: number): number[] => {
     
-    return [0];
+    const startingPoint = Math.floor(Math.sqrt(area));
+
+    if(startingPoint * startingPoint === area) {
+        return [startingPoint, startingPoint];
+    }
+
+    for(let i = startingPoint; i >= 1; i--) {
+        if(area % i == 0) return [area / i, i];
+    }
+
+    return [area, 1];
 
 };
 
