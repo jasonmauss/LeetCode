@@ -2,7 +2,28 @@
 
 const findCircleNum = (isConnected: number[][]): number => {
 
-    return 0;
+    let provinceCount:number = 0;
+
+    const cityNumbers:Set<number> = new Set<number>();
+
+    const findCitiesConnectedTo = (cityNumber:number): void => {
+
+        for(let j = 0; j < isConnected.length; j++) {
+            if(isConnected[cityNumber][j] === 1 && !cityNumbers.has(j)) {
+                cityNumbers.add(j);
+                findCitiesConnectedTo(j);
+            }
+        }
+    }
+
+    for(let i = 0; i < isConnected.length; i++) {
+        if(!cityNumbers.has(i)) {
+            provinceCount++;
+            findCitiesConnectedTo(i);
+        }
+    }
+
+    return provinceCount;
     
 };
 
