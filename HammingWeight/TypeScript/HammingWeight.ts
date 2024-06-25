@@ -2,7 +2,9 @@
 
 const hammingWeight = (n: number): number => {
     
-    return 0;
+    const regex = new RegExp('1','g');
+    const matches = n.toString(2).match(regex);
+    return matches ? matches.length : 0;
 
 };
 
