@@ -2,7 +2,19 @@
 
 const isUgly = (n: number): boolean => {
     
-    return false;
+    const maxDivide= (a: number, b: number): number => {
+        while (a % b == 0) {
+            a /= b;
+        }
+        return a;
+    }
+
+    if (n == 0) return false;
+    n = maxDivide(n, 2);
+    n = maxDivide(n, 3);
+    n = maxDivide(n, 5);
+
+    return n == 1;
 
 };
 
