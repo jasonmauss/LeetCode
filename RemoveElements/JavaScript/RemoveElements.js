@@ -7,10 +7,13 @@ var ListNode = /** @class */ (function () {
     }
     return ListNode;
 }());
-function removeElements(head, val) {
-    return null;
-}
-;
+var removeElements = function (head, val) {
+    if (head === null)
+        return null;
+    if (head.val === val)
+        return removeElements(head.next, val);
+    return (head.next = removeElements(head.next, val), head);
+};
 var node1 = new ListNode(1, new ListNode(2, new ListNode(6, new ListNode(3, new ListNode(4, new ListNode(5, new ListNode(6)))))));
 // some test cases
 console.log(removeElements(node1, 6)); // [1,2,3,4,5]

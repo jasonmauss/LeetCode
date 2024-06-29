@@ -12,8 +12,10 @@ class ListNode {
 }
 
 
-function removeElements(head: ListNode | null, val: number): ListNode | null {
-    return null;
+const removeElements = (head: ListNode | null, val: number): ListNode | null => {
+    if(head === null) return null;
+    if(head.val === val) return removeElements(head.next, val);
+    return (head.next = removeElements(head.next, val), head);
 };
 
 const node1:ListNode = new ListNode(1,
