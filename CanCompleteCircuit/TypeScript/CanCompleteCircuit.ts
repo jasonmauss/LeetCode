@@ -2,7 +2,24 @@
 
 const canCompleteCircuit = (gas: number[], cost: number[]): number => {
     
-    return 0;
+    let totalCost = 0,
+    gasStationIndex = 0,
+    tankLevel = 0;
+
+    for (let i = 0; i < gas.length; i++) {
+        const val = gas[i] - cost[i];
+        totalCost += val;
+        tankLevel += val;
+
+        if (totalCost < 0) {
+            totalCost = 0;
+            gasStationIndex = i + 1;
+        }
+    }
+
+    if (tankLevel < 0) return -1;
+
+    return gasStationIndex;
 
 };
 
