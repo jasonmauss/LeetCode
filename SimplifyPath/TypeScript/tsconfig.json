@@ -1,4 +1,6 @@
 {
+  "include": ["**.*"],
+  "exclude": [],
   "compilerOptions": {
     "target": "ES6",
     "module": "ES6",
