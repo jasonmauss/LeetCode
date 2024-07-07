@@ -14,7 +14,18 @@ class ListNode {
 
 const deleteDuplicates = (head: ListNode | null): ListNode | null => {
     
-    return null;
+    if(!head) return null;
+    if(!head.next) return head;
+
+    if(head.val === head.next.val) {
+        const duplicateValue = head.val;
+        while(head !== null && head.val === duplicateValue) {
+            head = head.next;
+        }
+        return deleteDuplicates(head);
+    }
+
+    return new ListNode(head.val, deleteDuplicates(head.next));
 
 };
 
