@@ -8,7 +8,18 @@ var ListNode = /** @class */ (function () {
     return ListNode;
 }());
 var deleteDuplicates = function (head) {
-    return null;
+    if (!head)
+        return null;
+    if (!head.next)
+        return head;
+    if (head.val === head.next.val) {
+        var duplicateValue = head.val;
+        while (head !== null && head.val === duplicateValue) {
+            head = head.next;
+        }
+        return deleteDuplicates(head);
+    }
+    return new ListNode(head.val, deleteDuplicates(head.next));
 };
 var Node1 = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(3, new ListNode(4, new ListNode(4, new ListNode(5)))))));
 // some test cases
